@@ -1,0 +1,30 @@
+/* ErrorPage.css */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .error-heading {
+    font-size: 2rem;
+    color: #ff6347; /* Tomato color */
+    margin-bottom: 20px;
+  }
+  
+  .error-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff; /* Bootstrap's primary color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .error-button:hover {
+    background-color: #0056b3; /* Darken the color on hover */
+  }
+  
