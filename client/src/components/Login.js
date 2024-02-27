@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import CSS file for styling
 import axios from "axios";
+import { useContext } from 'react';
+import LoginContext from '../context/LoginContext';
+import UserIdContext from '../context/UserIdContext';
 
 const Login = () => {
 
@@ -13,6 +16,9 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
+
+  const {setLoginInfo} = useContext(LoginContext);
+  const {setUserId} = useContext(UserIdContext);
 
   const handleLogin = async(e) => {
     e.preventDefault();
@@ -24,6 +30,11 @@ const Login = () => {
         password: password,
         role: role
       });
+
+      console.log(response.data);
+      setUserId(response.data.id);
+      
+      setLoginInfo(username);
 
       navigate('/movies');
   

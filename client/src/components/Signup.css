@@ -1,5 +1,5 @@
 /* Signup.css */
-.signup-container {
+/* .signup-container {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -40,4 +40,51 @@
   .button-container button:hover {
     background-color: #0056b3;
   }
-  
+   */
+
+
+
+
+   /* Signup.css */
+.signup-container {
+  width: 100%; /* Full width */
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.input-container {
+  margin-bottom: 15px;
+}
+
+.input-container input,
+.input-container select {
+  width: calc(100% - 20px); /* 100% width minus padding */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.button-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+}

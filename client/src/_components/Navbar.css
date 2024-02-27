@@ -1,0 +1,29 @@
+/* Navbar.css */
+
+nav {
+    background-color: #333; /* Background color of the navbar */
+    padding: 20px 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    display: inline;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  a {
+    color: white; /* Font color for links */
+    text-decoration: none;
+    padding: 5px 10px; /* Add padding to make links clickable */
+  }
+  
+  a:hover {
+    text-decoration: underline; /* Underline the link on hover */
+  }
+  

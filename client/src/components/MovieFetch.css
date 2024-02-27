@@ -6,11 +6,17 @@
   }
   
   .movie-item {
+    height: 580px;
     width: 300px;
     margin: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+
+  }
+
+  .movie-item:hover{
+    transform: scale(1.05);
   }
   
   .movie-id {
@@ -29,9 +35,10 @@
   }
   
   .movie-image {
-    width: 100%;
-    height: auto;
+    width: 300px;
+    height: 400px;
     margin-top: 10px;
+    border-radius: 3px;
   }
   
   .movie-adult {
