@@ -95,3 +95,27 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+--trigger to make sure the same favourites dont get added twice
+
+CREATE OR REPLACE FUNCTION prevent_duplicate_favorites()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM favourites
+        WHERE movie_id = NEW.movie_id
+        AND user_id = NEW.user_id
+    ) THEN
+        RAISE EXCEPTION 'This movie_id and user_id combination already exists in favourites table';
+    END IF;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_duplicate_favorites
+BEFORE INSERT ON favourites
+FOR EACH ROW
+EXECUTE FUNCTION prevent_duplicate_favorites();
+

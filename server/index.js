@@ -884,7 +884,40 @@ app.delete('/removeFromFavourites/:movieId/:userId', async (req,res) => {
 })
 
 
+//number of users that made this their favourite
+app.get("/noOfusersFavourite/:movieId", async(req,res) => {
+    
+    try 
+    {
+        const movieId = req.params.movieId;
+        
+        const {rows} = await pool.query(
+            `
+            SELECT COUNT(*)
+            FROM FAVOURITES
+            WHERE
+            MOVIE_ID = $1;
+            `,
+            [movieId]
+        )
 
+        if (rows.length == 0)
+        {
+            const errMsg = 'not able to fetch';
+            throw new Error(errMsg);
+        }
+        else
+        {
+            //console.log(rows[0]);
+            res.status(200).json(rows[0]);
+        }
+    } 
+    catch (err) 
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);    
+    }
+})
 
 
 
