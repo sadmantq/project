@@ -474,21 +474,28 @@ app.get("/movieSpecific/:id",async(req,res)=>{
 })
 
 
-app.get('/movies/:movieId/reviews', async(req,res)=>{
-    try {
+app.get('/movies/reviews/:movieId', async(req,res)=>{
+
+    try 
+    {
         const movieId = req.params.movieId;
         const {rows} = await pool.query(
             `select * from review where movie_id = $1;`,
             [movieId]
         )
-        if (rows.length == 0){
+        if (rows.length == 0)
+        {
             throw new Error("No data found");
-        } else{
+        } 
+        else
+        {
             console.log(rows);
-            res.status(200).json(rows[0]);
+            res.status(200).json(rows);
         }
 
-    } catch (err) {
+    } 
+    catch (err) 
+    {
         console.error(err);
         res.status(400).send(err.message);
     }
@@ -509,6 +516,7 @@ app.post('/movies/reviewPost', async(req,res)=>{
             `,
             [movieId,userId,review]
         )
+        
         
         res.status(200).send("Has been recorded successfully");
 

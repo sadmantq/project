@@ -1,0 +1,23 @@
+.comments-container {
+    margin-top: 20px;
+}
+
+.single-comment-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 400px;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
+
+.user-id-container {
+    font-weight: bold;
+    color: antiquewhite;
+}
+
+.review-container {
+    margin-top: 5px;
+    color:beige;
+}

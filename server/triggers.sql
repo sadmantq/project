@@ -119,3 +119,28 @@ BEFORE INSERT ON favourites
 FOR EACH ROW
 EXECUTE FUNCTION prevent_duplicate_favorites();
 
+--none of the review stuff can be null
+
+CREATE OR REPLACE FUNCTION check_review_not_null() 
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.movie_id IS NULL THEN
+        RAISE EXCEPTION 'movie_id cannot be null';
+    END IF;
+
+    IF NEW.user_id IS NULL THEN
+        RAISE EXCEPTION 'user_id cannot be null';
+    END IF;
+
+    IF NEW.review_statement IS NULL THEN
+        RAISE EXCEPTION 'review_statement cannot be null';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER enforce_review_not_null
+BEFORE INSERT ON review
+FOR EACH ROW
+EXECUTE FUNCTION check_review_not_null();

@@ -106,7 +106,7 @@ export default function _comment() {
                         placeholder="Enter your review here..."
                     />
                 </label>
-                <button type="submit" className="comment-submit">Submit Review</button>
+                <button type="submit" className="comment-submit" >Submit Review</button>
             </form>
         </div>
     );

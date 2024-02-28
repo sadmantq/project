@@ -39,6 +39,7 @@ import axios from "axios";
 import "./MovieDetails.css"; // Import CSS file
 import Navbar from "../_components/Navbar";
 import _comment  from "../comment/_comment.js";
+import CommentShow from "../comment/CommentShow.js";
 
 
 export default function MovieDetails() {
@@ -76,6 +77,7 @@ export default function MovieDetails() {
                 <div className="movie-review">Review: {movieData.description}</div>
                 
                 <_comment />
+                <CommentShow />
                 
             </div>
         </div>
