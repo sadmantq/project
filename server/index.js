@@ -153,11 +153,11 @@ app.get("/movies/:id", async(req,res)=>{
 
 app.get("/director/:id",async(req,res)=>{
     try {
-        const id = req.params;
+        const id = req.params.id;
         const {rows} = await pool.query(
             `SELECT *
-            FROM DIRECTORS
-            WHERE ID = $1;`,
+            FROM DIRECTOR_INFO
+            WHERE DIRECTOR_ID = $1;`,
             [id]
         )
         console.log(rows);
@@ -166,7 +166,7 @@ app.get("/director/:id",async(req,res)=>{
             throw new Error(message);
         }
         else{
-            res.status(200).json(rows);
+            res.status(200).json(rows[0]);
         }
 
     } catch (err) {
@@ -230,7 +230,7 @@ app.get("/directors",async(req,res)=>{
         const {rows} = await pool.query(
             `SELECT * FROM DIRECTOR_INFO;`
         )
-        console.log(rows);
+        //console.log(rows);
         res.status(200).json(rows);
 
     } catch (err) {
@@ -286,11 +286,37 @@ app.delete("movie/:id", async(req,res)=>{
     }
 })
 
-app.delete("/director/:id", async(req,res)=>{
-    try {
+app.delete("/directors/:id", async(req,res)=>{
+    try 
+    {
+
+        const director_id = req.params.id;
+
+        const {rows} = await pool.query(
+            `
+            DELETE FROM DIRECTOR_INFO
+            WHERE
+            DIRECTOR_ID = $1
+            RETURNING *;
+            `,
+            [director_id]
+        )
+
+        if (rows.length == 0)
+        {
+            const errMsg = 'no such director';
+            throw new Error(errMsg);
+        }
+        else
+        {
+            // console.log(rows[0]);
+            res.status(200).json(rows[0]);
+        }
         
-    } catch (err) {
-        console.error(err);
+    } 
+    catch (err) 
+    {
+        console.error(err.message);
         res.status(400).send(err.message);
     }
 })
@@ -970,7 +996,7 @@ app.get('/Search/genre', async (req,res) => {
             [`%${search}%`]
         )
 
-        
+        res.status(200).json(rows);
     } 
     catch (err) 
     {

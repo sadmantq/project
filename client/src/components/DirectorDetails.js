@@ -1,26 +1,34 @@
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import React, { useEffect } from "react";
+import DirectorIdContext from "../context/DirectorIdContext";
+import { useParams } from "react-router-dom";
+
 
 export default function DirectorDetails(){
 
-    const [director,setDirector] = React.useState();
-    
-    useEffect(()=>{
-        try {
-            axios.get("http://localhost:5000/directors")
-            .then(res => setDirector(res.data))
-            .then(data => console.log(data));
+    const {directorId} = useParams();
 
-        } catch (err) {
-            console.error(err);
-        }   
-    }
+    const {currentDirector} = useContext(DirectorIdContext);
+    const [thisDirector,setThisDirector] = useState();
 
-    ,[])
+    // useEffect(() => {
+    //     try 
+    //     {
+    //         axios.get(`http://localhost:5000/director/${directorId}`)
+    //         .then(res => setThisDirector(res.data))
+    //         .catch(err => console.log(err));
+
+
+    //     } 
+    //     catch (err) 
+    //     {
+    //         console.log(err);
+    //     }
+    // },[])
 
     return (
-        <>
-            <h1>  </h1>
-        </>
+        <h1 style={{color: 'red'}}>{directorId}</h1>
+
+
     )
 }

@@ -1,11 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import CurrentMovieContext from "../context/CurrentMovieContext";
+import { useNavigate } from "react-router-dom";
+import './DirectorFetch.css';
+import DirectorIdContext from "../context/DirectorIdContext";
 
 
 export default function DirectorFetch() {
 
-    const {setCurrentDirector} = useContext(CurrentMovieContext);
+    const navigate = useNavigate();
+
+    const {setCurrentDirector} = useContext(DirectorIdContext);
 
     const [directors,setDirectors] = useState([]);
 
@@ -30,7 +35,10 @@ export default function DirectorFetch() {
             {
                 directors.map(item => {
                     return (
-                        <div className="director-container">
+                        <div className="director-container" onClick={()=>{
+                            setCurrentDirector(item.director_id);
+                            navigate(`/director/${item.director_id}`);
+                        }}>
                             <div className="director-id">{item.director_id}</div>
                             <div className="director-full-name">{item.director_first_name} {item.director_last_name}</div>
                             <div className="director-age">{item.director_age}</div>

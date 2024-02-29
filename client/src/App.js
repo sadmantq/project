@@ -14,6 +14,7 @@ import CurrentMovieContext from "./context/CurrentMovieContext";
 import ReviewContext from "./context/ReviewContext";
 import DirectorFetch from "./components/DirectorFetch";
 import DirectorIdContext from "./context/DirectorIdContext";
+import DirectorDetails from "./components/DirectorDetails";
 
 
 
@@ -44,6 +45,7 @@ function App() {
         <Route path = '/errorLogin' element= {<ErrorPage />} />
         <Route path = '/movies/:id' element = {<MovieDetails/>}/>
         <Route path = '/directorFetch' element = {<DirectorFetch />}/>
+        <Route path = '/director/:id' element = {<DirectorDetails/>} />
        </Routes>
 
        </ReviewContext.Provider>
