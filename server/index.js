@@ -231,7 +231,7 @@ app.get("/directors",async(req,res)=>{
             `SELECT * FROM DIRECTOR_INFO;`
         )
         console.log(rows);
-        rows.status(200).json(rows);
+        res.status(200).json(rows);
 
     } catch (err) {
         console.error(err);
