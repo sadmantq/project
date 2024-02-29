@@ -927,6 +927,58 @@ app.get("/noOfusersFavourite/:movieId", async(req,res) => {
     }
 })
 
+//implement search
+
+app.get('/Search/movieName', async (req,res) => {
+
+    try 
+    {
+        const search = req.body.search;
+        
+        const {rows} = await pool.query(
+            `
+            SELECT *
+            FROM MOVIES
+            WHERE 
+            NAME ILIKE  $1;
+            `,
+            [`%${search}%`]
+        )
+
+        res.status(200).json(rows);
+    } 
+    catch (err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+app.get('/Search/genre', async (req,res) => {
+
+    try 
+    {
+        const search = req.body.search;
+
+        const {rows} = await pool.query(
+            `
+            SELECT *
+            FROM MOVIES
+            WHERE
+            GENRE ILIKE $1;
+            `,
+            [`%${search}%`]
+        )
+
+        
+    } 
+    catch (err) 
+    {
+       console.error(err.message);
+       res.status(400).send(err.message); 
+    }
+})
+
 
 
 

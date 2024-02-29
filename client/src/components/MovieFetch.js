@@ -43,12 +43,14 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginContext from "../context/LoginContext";
 import { useContext } from "react";
 import CurrentMovieContext from "../context/CurrentMovieContext";
+import SearchBar from "../Search/SearchBar";
 
 
 export default function MovieFetch(){
 
     const {setCurrentMovie} = useContext(CurrentMovieContext);
 
+    
     const navigate = useNavigate();
 
     const {loginInfo} = useContext(LoginContext);
@@ -72,6 +74,7 @@ export default function MovieFetch(){
         <>
         
         <div className="movie-container">
+            <SearchBar />
             {data.map(item => {
                 return (
                     <>

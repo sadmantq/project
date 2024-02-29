@@ -56,6 +56,7 @@ import axios from 'axios';
 import UserIdContext from "../context/UserIdContext";
 import CurrentMovieContext from "../context/CurrentMovieContext";
 import "./_comment.css"
+import ReviewContext from "../context/ReviewContext";
 
 export default function _comment() {
     const [movie_Id, setMovie_Id] = useState();
@@ -64,6 +65,9 @@ export default function _comment() {
 
     const { userId } = useContext(UserIdContext);
     const { currentMovie } = useContext(CurrentMovieContext);
+
+    const {setReviewCng} = useContext(ReviewContext);
+    const {reviewCng} = useContext(ReviewContext);
 
     useEffect(() => {
         setUser_Id(userId);
@@ -82,7 +86,8 @@ export default function _comment() {
                 userId: user_Id,
                 review: review_Statement
             })
-
+            setReviewCng(!reviewCng);
+            setReview_Statement('');
             console.log(Response.data);
         } catch (error) {
             console.error('Error submitting review:', error);

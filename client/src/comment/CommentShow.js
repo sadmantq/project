@@ -3,10 +3,12 @@ import './CommentShow.css';
 import axios from "axios";
 import CurrentMovieContext from "../context/CurrentMovieContext";
 import './CommentShow.css'
+import ReviewContext from "../context/ReviewContext";
 
 export default function CommentShow(){
 
     //let availableReviews = true;
+    const {reviewCng} = useContext(ReviewContext);
     const [availableReviews, setAvailableReviews] = useState(true);
     const [comments,setComments] = React.useState([]);
 
@@ -26,7 +28,7 @@ export default function CommentShow(){
         {
             console.error(err);
         }
-    },[currentMovie])
+    },[reviewCng])
 
 
     return (

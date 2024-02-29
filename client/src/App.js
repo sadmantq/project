@@ -11,6 +11,7 @@ import LoginContext from "./context/LoginContext";
 import UserIdContext from "./context/UserIdContext";
 import Navbar from "./_components/Navbar";
 import CurrentMovieContext from "./context/CurrentMovieContext";
+import ReviewContext from "./context/ReviewContext";
 
 
 
@@ -20,12 +21,16 @@ function App() {
   const [loginInfo,setLoginInfo] = React.useState();
   const [userId,setUserId] = React.useState();
   const [currentMovie,setCurrentMovie] = React.useState();
+  
+
+  const [reviewCng,setReviewCng] = React.useState(true);
 
   return (
     <>
         <UserIdContext.Provider value = {{userId,setUserId}}>
         <LoginContext.Provider value = {{loginInfo,setLoginInfo}}>
         <CurrentMovieContext.Provider value = {{currentMovie,setCurrentMovie}}>
+        <ReviewContext.Provider value={{reviewCng,setReviewCng}}>
       <Routes>
         <Route path = '/' element = {<WelcomePage /> }/>
 
@@ -36,6 +41,7 @@ function App() {
         <Route path = '/movies/:id' element = {<MovieDetails/>}/>
        </Routes>
 
+       </ReviewContext.Provider>
        </CurrentMovieContext.Provider>
         </LoginContext.Provider>
         </UserIdContext.Provider>
