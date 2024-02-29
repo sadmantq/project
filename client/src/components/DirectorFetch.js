@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import CurrentMovieContext from "../context/CurrentMovieContext";
 
 
 export default function DirectorFetch() {
+
+    const {setCurrentDirector} = useContext(CurrentMovieContext);
 
     const [directors,setDirectors] = useState([]);
 

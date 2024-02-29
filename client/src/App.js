@@ -13,6 +13,7 @@ import Navbar from "./_components/Navbar";
 import CurrentMovieContext from "./context/CurrentMovieContext";
 import ReviewContext from "./context/ReviewContext";
 import DirectorFetch from "./components/DirectorFetch";
+import DirectorIdContext from "./context/DirectorIdContext";
 
 
 
@@ -22,12 +23,14 @@ function App() {
   const [loginInfo,setLoginInfo] = React.useState();
   const [userId,setUserId] = React.useState();
   const [currentMovie,setCurrentMovie] = React.useState();
+  const [currentDirector,setCurrentDirector] = React.useState();
   
 
   const [reviewCng,setReviewCng] = React.useState(true);
 
   return (
     <>
+        <DirectorIdContext.Provider value = {{currentDirector,setCurrentDirector}}>
         <UserIdContext.Provider value = {{userId,setUserId}}>
         <LoginContext.Provider value = {{loginInfo,setLoginInfo}}>
         <CurrentMovieContext.Provider value = {{currentMovie,setCurrentMovie}}>
@@ -47,6 +50,7 @@ function App() {
        </CurrentMovieContext.Provider>
         </LoginContext.Provider>
         </UserIdContext.Provider>
+        </DirectorIdContext.Provider>
     </>
   );
 }
