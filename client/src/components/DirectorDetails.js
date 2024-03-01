@@ -6,28 +6,42 @@ import { useParams } from "react-router-dom";
 
 export default function DirectorDetails(){
 
-    const {directorId} = useParams();
+    //const { dirId } = useParams();
 
     const {currentDirector} = useContext(DirectorIdContext);
-    const [thisDirector,setThisDirector] = useState();
+    const [thisDirector,setThisDirector] = useState({});
 
-    // useEffect(() => {
-    //     try 
-    //     {
-    //         axios.get(`http://localhost:5000/director/${directorId}`)
-    //         .then(res => setThisDirector(res.data))
-    //         .catch(err => console.log(err));
+    useEffect(() => {
+        try 
+        {
+            axios.get(`http://localhost:5000/director/${currentDirector}`)
+            .then(res => setThisDirector(res.data))
+            .catch(err => console.log(err));
 
 
-    //     } 
-    //     catch (err) 
-    //     {
-    //         console.log(err);
-    //     }
-    // },[])
+        } 
+        catch (err) 
+        {
+            console.log(err);
+        }
+    },[])
+
+    console.log(currentDirector);
+    console.log(thisDirector);
 
     return (
-        <h1 style={{color: 'red'}}>{directorId}</h1>
+        <>
+                        <div className="director-container"  >
+                            <div className="director-id">{thisDirector.director_id}</div>
+                            <div className="director-full-name">{thisDirector.director_first_name} {thisDirector.director_last_name}</div>
+                            <div className="director-age">{thisDirector.director_age}</div>
+                            <div className="director-email">{thisDirector.director_email}</div>
+                            <div className="director-homecountry">{thisDirector.director_country}</div>
+                            <div className="director-nationality">{thisDirector.director_nationality}</div>
+                            <div className="director-awards">{thisDirector.director_awards}</div>
+                            <div className="director-gender">{thisDirector.director_gender}</div>
+                        </div>
+        </>
 
 
     )

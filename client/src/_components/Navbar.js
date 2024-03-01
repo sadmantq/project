@@ -9,6 +9,7 @@ export default function Navbar(){
             <ul>
                 <li><Link to="/movies">Home</Link></li>
                 <li><Link>About</Link></li>
+                <li><Link to = '/directorFetch'>Directors</Link></li>
             </ul>
         </nav>
     )

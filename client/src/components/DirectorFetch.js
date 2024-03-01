@@ -36,17 +36,19 @@ export default function DirectorFetch() {
                 directors.map(item => {
                     return (
                         <div className="director-container" onClick={()=>{
+                            console.log(item.director_id);
                             setCurrentDirector(item.director_id);
                             navigate(`/director/${item.director_id}`);
                         }}>
                             <div className="director-id">{item.director_id}</div>
                             <div className="director-full-name">{item.director_first_name} {item.director_last_name}</div>
-                            <div className="director-age">{item.director_age}</div>
+                            {/* <div className="director-age">{item.director_age}</div>
                             <div className="director-email">{item.director_email}</div>
                             <div className="director-homecountry">{item.director_country}</div>
                             <div className="director-nationality">{item.director_nationality}</div>
                             <div className="director-awards">{item.director_awards}</div>
-                            <div className="director-gender">{item.director_gender}</div>
+                            <div className="director-gender">{item.director_gender}</div> */}
+                            {/* fetch korar time e director er full info deyar dorkar nai  */}
                         </div>
                     )
                 })
