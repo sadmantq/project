@@ -62,6 +62,16 @@ export default function MovieDetails() {
             .catch(error => {
                 console.error('Error fetching movie data:', error);
             });
+        
+        axios.get(`http://localhost:5000/checkLike/${id}/${userId}`)
+        .then(res => setLikeClicked(true))
+        .catch(err => setLikeClicked(false));
+
+        axios.get(`http://localhost:5000/checkDislike/${id}/${userId}`)
+        .then(res => setDislikeClicked(true))
+        .catch(err => setDislikeClicked(false));
+
+
     }, id); // id as a dependency
 
     async function handleLike()

@@ -377,6 +377,40 @@ app.get('/checkLike/:postId/:userId', async(req,res) => {
     }
 })
 
+app.get('/checkDislike/:postId/:userId', async(req,res) => {
+    try
+    {
+        const postId = req.params.postId;
+        const userId = req.params.userId;
+
+        const {rows} = await pool.query(
+            `
+            SELECT *
+            FROM DISLIKES
+            WHERE
+            USER_ID = $1
+            AND
+            MOVIE_ID = $2;
+            `,
+            [userId,postId]
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('no dislike');
+        }
+        else
+        {
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch (err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
 //remove like from a post
 
 app.delete("/removeLike/:postId/:userId", async(req,res)=>{
