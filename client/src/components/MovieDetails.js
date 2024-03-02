@@ -34,7 +34,7 @@
 // }
 
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./MovieDetails.css"; // Import CSS file
 import Navbar from "../_components/Navbar";
@@ -47,10 +47,14 @@ export default function MovieDetails() {
     const { id } = useParams();
     const {userId} = useContext(UserIdContext);
 
+    const [trailer,setTrailer] = useState({});
+
     const [movieData, setMovieData] = useState({});
     const [likeClicked,setLikeClicked] = useState(false);
     const [dislikeClicked,setDislikeClicked] = useState(false);
     const [watchlistClicked,setWatchlistClicked] = useState(false);
+
+    const navigate = useNavigate();
     
     useEffect(() => {
         axios.get(`http://localhost:5000/movies/${id}`)
@@ -70,6 +74,14 @@ export default function MovieDetails() {
         axios.get(`http://localhost:5000/checkDislike/${id}/${userId}`)
         .then(res => setDislikeClicked(true))
         .catch(err => setDislikeClicked(false));
+
+        axios.get(`http://localhost:5000/checkWatchlist/${id}/${userId}`)
+        .then(res => setWatchlistClicked(true))
+        .catch(err => setWatchlistClicked(false));
+
+        axios.get(`http://localhost:5000/getTrailer/${id}`)
+        .then(res => setTrailer(res.data))
+        .catch(err => console.log(err));
 
 
     }, id); // id as a dependency
@@ -185,6 +197,8 @@ export default function MovieDetails() {
                 <div className="movie-genre">Genre: {movieData.genre}</div>
                 <div className="movie-review">Review: {movieData.description}</div>
 
+                <button type="button" className="btn btn-outline-info" onClick={() => navigate(`/trailer/${trailer.movie_trailer}`)}>see trailer</button>
+
                 <div className="d-flex flex-row mb-3 column-gap-3">
                 <div className="like-button">
                     <button type ="button" className={`btn ${likeClicked? 'btn-primary' : 'btn-secondary' }`} onClick={() => {
@@ -250,6 +264,8 @@ export default function MovieDetails() {
                     </button>
                 </div>
                 </div>
+
+                {/* <button type="button" class="btn btn-outline-info" onClick={navigate(`/trailer/${'H7GtkK44npY'}`)}>see trailer</button> */}
                 
                 <_comment />
                 <CommentShow />

@@ -804,6 +804,42 @@ app.post("/addToWatchlist/:movieId/:userId", async(req,res)=>{
     }
 })
 
+//check if its in watchliist
+
+app.get('/checkWatchlist/:movieId/:userId', async (req,res) => {
+    try
+    {
+        const movieId = req.params.movieId;
+        const userId = req.params.userId;
+
+        const {rows} = await pool.query(
+            `
+            SELECT *
+            FROM WATCHLIST
+            WHERE
+            MOVIE_ID = $1 
+            AND
+            USER_ID = $2;
+            `,
+            [movieId,userId]
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('not added');
+        }
+        else
+        {
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
 //removing from watchlist
 
 app.delete("/removeFromWatchlist/:userId/:movieId", async (req,res)=> {
@@ -1056,11 +1092,11 @@ app.get('/Search/movieName/:name', async (req,res) => {
     }
 })
 
-app.get('/Search/genre', async (req,res) => {
+app.get('/Search/:genre', async (req,res) => {
 
     try 
     {
-        const search = req.body.search;
+        const search = req.params.genre;
 
         const {rows} = await pool.query(
             `
@@ -1081,7 +1117,41 @@ app.get('/Search/genre', async (req,res) => {
     }
 })
 
+//get trailer
 
+app.get('/getTrailer/:movieId', async(req,res) => {
+    try
+    {
+        const movieId = req.params.movieId;
+
+        const {rows} = await pool.query(
+            `
+            SELECT MOVIE_TRAILER
+            FROM TRAILERS
+            WHERE 
+            MOVIE_ID = $1;
+            `,
+            [movieId]
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('No trailer available');
+        }
+        else
+        {
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
+//add movies to cloud and fetch and show to premium members
 
 
 

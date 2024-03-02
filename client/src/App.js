@@ -16,6 +16,7 @@ import DirectorFetch from "./components/DirectorFetch";
 import DirectorIdContext from "./context/DirectorIdContext";
 import DirectorDetails from "./components/DirectorDetails";
 import AboutPage from "./about_page/AboutPage";
+import Trailer from "./trailerShow/Trailer";
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path = '/directorFetch' element = {<DirectorFetch />}/>
         <Route path = '/director/:id' element = {<DirectorDetails/>} />
         <Route path = '/about' element ={<AboutPage/>} />
+        <Route path = '/trailer/:link' element = {<Trailer />} />
        </Routes>
 
        </ReviewContext.Provider>
