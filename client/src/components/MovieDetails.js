@@ -197,7 +197,7 @@ export default function MovieDetails() {
                 <div className="movie-genre">Genre: {movieData.genre}</div>
                 <div className="movie-review">Review: {movieData.description}</div>
 
-                <button type="button" className="btn btn-outline-info" onClick={() => navigate(`/trailer/${trailer.movie_trailer}`)}>see trailer</button>
+                <button type="button" className="btn btn-outline-info" style={{marginBottom:'9px'}} onClick={() => navigate(`/trailer/${trailer.movie_trailer}`)}>see trailer</button>
 
                 <div className="d-flex flex-row mb-3 column-gap-3">
                 <div className="like-button">
