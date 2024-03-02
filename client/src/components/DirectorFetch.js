@@ -4,6 +4,7 @@ import CurrentMovieContext from "../context/CurrentMovieContext";
 import { useNavigate } from "react-router-dom";
 import './DirectorFetch.css';
 import DirectorIdContext from "../context/DirectorIdContext";
+import Navbar from "../_components/Navbar";
 
 
 export default function DirectorFetch() {
@@ -32,7 +33,9 @@ export default function DirectorFetch() {
 
     return (
         <div className="container">
+            <Navbar />
             {
+
                 directors.map(item => {
                     return (
                         <div className="director-container" onClick={()=>{

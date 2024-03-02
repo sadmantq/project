@@ -58,7 +58,7 @@ export default function MovieFetch(){
     const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
-        axios.get("http://localhost:5000/movies")
+         axios.get("http://localhost:5000/movies")
             .then(res => setData(res.data));
     }, []);
 

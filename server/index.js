@@ -341,6 +341,44 @@ app.post("/like/:postid/:userid", async(req,res)=>{
     }
 })
 
+//check if the post has been liked or not
+
+app.get('/checkLike/:postId/:userId', async(req,res) => {
+    try 
+    {
+        const postId = req.params.postId;
+        const userId = req.params.userId;
+
+        const {rows} = await pool.query(
+            `
+            SELECT *
+            FROM LIKES
+            WHERE 
+            USER_ID = $1
+            AND
+            MOVIE_ID = $2;
+            `,
+            [userId,postId]
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('not yet liked');
+        }
+        else
+        {
+            res.status(200).json(rows[0]);
+        }
+    } 
+    catch (err) 
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//remove like from a post
+
 app.delete("/removeLike/:postId/:userId", async(req,res)=>{
     try {
         const postId = req.params.postId;
@@ -955,11 +993,13 @@ app.get("/noOfusersFavourite/:movieId", async(req,res) => {
 
 //implement search
 
-app.get('/Search/movieName', async (req,res) => {
+app.get('/Search/movieName/:name', async (req,res) => {
 
     try 
     {
-        const search = req.body.search;
+        const search = req.params.name;
+
+        console.log(search);
         
         const {rows} = await pool.query(
             `
@@ -970,6 +1010,8 @@ app.get('/Search/movieName', async (req,res) => {
             `,
             [`%${search}%`]
         )
+
+        //console.log(rows);
 
         res.status(200).json(rows);
     } 

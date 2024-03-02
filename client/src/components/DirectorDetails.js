@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import DirectorIdContext from "../context/DirectorIdContext";
 import { useParams } from "react-router-dom";
+import './DirectorDetails.css'
+import Navbar from "../_components/Navbar";
 
 
 export default function DirectorDetails(){
@@ -31,6 +33,7 @@ export default function DirectorDetails(){
 
     return (
         <>
+                        <Navbar />
                         <div className="director-container"  >
                             <div className="director-id">{thisDirector.director_id}</div>
                             <div className="director-full-name">{thisDirector.director_first_name} {thisDirector.director_last_name}</div>

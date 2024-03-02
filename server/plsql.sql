@@ -32,4 +32,23 @@ END;
 $$ LANGUAGE PLPGSQL;
 
 
+-- make sure je dislike table er moddhe duita pair same na hoy
 
+CREATE OR REPLACE FUNCTION check_dislikes_duplicate()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM dislikes
+        WHERE user_id = NEW.user_id AND movie_id = NEW.movie_id
+    ) THEN
+        RAISE EXCEPTION 'Duplicate user_id and movie_id pair in dislikes table';
+    END IF;
+    
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER before_insert_check_dislikes_duplicate
+BEFORE INSERT ON dislikes
+FOR EACH ROW
+EXECUTE FUNCTION check_dislikes_duplicate();

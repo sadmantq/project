@@ -1,0 +1,17 @@
+.director-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 0 auto; /* Centers the container */
+}
+
+.director-container > div {
+    margin-bottom: 10px;
+}
+
+.director-full-name {
+    font-weight: bold;
+}
+
+/* Add more styles as needed */

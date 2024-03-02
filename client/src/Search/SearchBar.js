@@ -21,24 +21,34 @@ export default function SearchBar()
 
    
 
-    const handleChange = async(e) => {
+    const handleChange = (e) => {
+
         setSearch(e.target.value);
+    }
+    
+    useEffect(() => {
+
+        if (search != ''){
         try
         {
-            const response = await axios.get('http://localhost:5000/Search/movieName',{
-                search: search
-            }).then(res => setResult(res.data))
+            axios.get(`http://localhost:5000/Search/movieName/${search}`)
+              .then(res => setResult(res.data))
               .then(data => console.log(data))
-              .catch(err => console.log(err));
-
+            //   .catch(err => console.log(err));
+    
             setResultShow(true);
-
+    
         }
         catch(err)
         {
             console.error(err);
         }
     }
+        else{
+            setResultShow(false);
+        }
+
+    },[search])
     
     return(
         <>
@@ -67,13 +77,13 @@ export default function SearchBar()
             {resultShow && result.map(item => {
                 return(
                     <>
-                       <div className="movie-item" key={item.id} onClick={()=>{
+                       <div className="movie-item"  key={item.id} onClick={()=>{
                             setCurrentMovie(item.id);
                             navigate(`/movies/${item.id}`)}}>
-                            <h6 className="movie-id">ID: {item.id}</h6>
+                            {/* <h6 className="movie-id">ID: {item.id}</h6> */}
                             <p className="movie-name">{item.name}</p>
-                            <p className="movie-year">Year of Release: {item.year}</p>
-                            <img className="movie-image" src={item.image} alt="Movie Poster"/>
+                            {/* <p className="movie-year">Year of Release: {item.year}</p> */}
+                            <img className="movie-image" src={item.image} alt="Movie Poster" />
                         </div> 
                     </>
                 )

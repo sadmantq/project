@@ -144,3 +144,24 @@ CREATE TRIGGER enforce_review_not_null
 BEFORE INSERT ON review
 FOR EACH ROW
 EXECUTE FUNCTION check_review_not_null();
+
+
+--make sure kore je same movie same user duibar like na kore dey
+
+CREATE OR REPLACE FUNCTION check_likes_duplicate()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM likes
+        WHERE user_id = NEW.user_id AND movie_id = NEW.movie_id
+    ) THEN
+         RAISE EXCEPTION 'Duplicate user_id and movie_id pair';
+    END IF; 
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER before_insert_check_likes_duplicate
+BEFORE INSERT ON likes
+FOR EACH ROW
+EXECUTE FUNCTION check_likes_duplicate();

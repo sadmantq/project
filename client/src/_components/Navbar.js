@@ -8,8 +8,9 @@ export default function Navbar(){
         <nav>
             <ul>
                 <li><Link to="/movies">Home</Link></li>
-                <li><Link>About</Link></li>
+                <li><Link to = '/about'>About</Link></li>
                 <li><Link to = '/directorFetch'>Directors</Link></li>
+                <li><Link to = '/login'>Log Out</Link></li>
             </ul>
         </nav>
     )
