@@ -1,0 +1,34 @@
+body,html{
+    margin: 0;
+  padding: 0;
+}
+
+.form-control:hover{
+    transform:scale(1.02);
+    box-shadow: inset;
+    background-color:white;
+}
+
+.form-control{
+    margin-bottom: 10px;
+    background-color: beige;
+}
+
+
+.form-label{
+    margin-top: 10px;
+}
+
+.input-container:hover{
+    transform: scale(1.02);
+    box-shadow: color(from color srgb r g b);
+}
+
+.btn-outline-light{
+    color:beige;
+}
+
+.btn-outline-light:hover{
+    transform: scale(1.02);
+    color:darkturquoise;
+}
