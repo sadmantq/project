@@ -64,6 +64,7 @@ const Signup = () => {
             <option value="user">User</option>
             <option value="director">Director</option>
             <option value="producer">Producer</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
         <div className='input-container'>

@@ -36,7 +36,15 @@ const Login = () => {
       
       setLoginInfo(username);
 
-      navigate('/movies');
+
+      if (role == "admin")
+      {
+        navigate('/admin');
+      }
+      else
+      {
+        navigate('/movies');
+      }
   
     } catch (err) {
       
@@ -70,6 +78,7 @@ const Login = () => {
             <option value="user">User</option>
             <option value="director">Director</option>
             <option value="producer">Producer</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
         <div className="button-container">

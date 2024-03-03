@@ -1,37 +1,3 @@
-// import React from "react";
-// import { useParams } from "react-router-dom";
-// import { useState } from "react";
-// import { useEffect } from "react";
-// import axios from "axios";
-
-// export default function MovieDetails(){
-
-//     const {id} = useParams();
-    
-
-
-//     const [movieData,setMovieData] = useState({});
-//     useEffect(()=>{
-//         axios.get(`http://localhost:5000/movies/${id}`)
-//         .then(res => setMovieData(res.data));
-
-//         console.log(movieData);
-//     },[])
-
-    
-//     return (
-//         <div>
-//             <img src = {movieData.image}/>
-//             <div>{movieData.id}</div>
-//             <div>{movieData.name}</div>
-//             <div>{movieData.year}</div>
-//             <div>{movieData.is_adult}</div>
-//             <div>{movieData.genre}</div>
-//             <div>{movieData.genre}</div>
-
-//         </div>
-//     )
-// }
 
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";

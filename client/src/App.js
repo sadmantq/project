@@ -17,6 +17,10 @@ import DirectorIdContext from "./context/DirectorIdContext";
 import DirectorDetails from "./components/DirectorDetails";
 import AboutPage from "./about_page/AboutPage";
 import Trailer from "./trailerShow/Trailer";
+import SearchResults from "./Search/SearchResults";
+import AdminMain from "./admin/AdminMain";
+import AddMovie from "./admin/addMovie/AddMovie";
+import RemoveMovie from "./admin/removeMovie/RemoveMovie";
 
 
 
@@ -39,8 +43,9 @@ function App() {
         <CurrentMovieContext.Provider value = {{currentMovie,setCurrentMovie}}>
         <ReviewContext.Provider value={{reviewCng,setReviewCng}}>
       <Routes>
-        <Route path = '/' element = {<WelcomePage /> }/>
 
+
+        <Route path = '/' element = {<WelcomePage /> }/>
         <Route path= '/login' element = {<Login />} />
         <Route path= '/signup' element = {<Signup />} />
         <Route path = '/movies' element = {<MovieFetch />}  />
@@ -50,6 +55,13 @@ function App() {
         <Route path = '/director/:id' element = {<DirectorDetails/>} />
         <Route path = '/about' element ={<AboutPage/>} />
         <Route path = '/trailer/:link' element = {<Trailer />} />
+        <Route path = '/filterSearch' element = {<SearchResults />} />
+        <Route path = '/admin' element = {<AdminMain />} />
+        <Route path = '/admin/addMovie' element ={<AddMovie />} />
+        <Route path = '/admin/removeMovie' element ={<RemoveMovie />} />
+
+
+        
        </Routes>
 
        </ReviewContext.Provider>

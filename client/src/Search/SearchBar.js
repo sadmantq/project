@@ -54,7 +54,11 @@ export default function SearchBar()
         <>
         <div className="search-bar-container" >
 
-                <button type="button" className="btn btn btn-outline-light btn-sm" style={{height:'36px',marginRight:'10px'}}>
+                <button type="button" className="btn btn btn-outline-light btn-sm" style={{height:'36px',marginRight:'10px'}} 
+                    onClick={() => {
+                        navigate('/filterSearch');
+                    }}
+                >
                     Filter Search
                 </button>
                 <input 
@@ -73,15 +77,15 @@ export default function SearchBar()
                         <p className="movie-genre">Genre: {item.genre}</p>
                         <p className="movie-description">Review: {item.description}</p> */}
                         {/*<Link to ={`/movies/${item.id}`}>Click to see full movie</Link>*/}
-        {<div className="search-result-container">
+        {<div className="search-result-container" style={{backgroundColor: 'whitesmoke'}}>
             {resultShow && result.map(item => {
                 return(
                     <>
-                       <div className="movie-item"  key={item.id} onClick={()=>{
+                       <div className="w-25 h-25 p-3 hover-effect"  key={item.id} onClick={()=>{
                             setCurrentMovie(item.id);
                             navigate(`/movies/${item.id}`)}}>
                             {/* <h6 className="movie-id">ID: {item.id}</h6> */}
-                            <p className="movie-name">{item.name}</p>
+                            {/* <p className="movie-name">{item.name}</p> */}
                             {/* <p className="movie-year">Year of Release: {item.year}</p> */}
                             <img className="movie-image" src={item.image} alt="Movie Poster" />
                         </div> 

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import YouTube from "react-youtube";
 import Navbar from "../_components/Navbar";
+import { faBucket } from "@fortawesome/free-solid-svg-icons";
+import CurrentMovieContext from "../context/CurrentMovieContext";
 
 export default function Trailer()
 {
@@ -11,6 +13,9 @@ export default function Trailer()
     //console.log(urlofvid);
     const [trailer,setTrailer] = useState('');
     //setTrailer(link);
+
+    const navigate = useNavigate();
+    const {currentMovie} = useContext(CurrentMovieContext);
 
     const opts = {
         height: '390',
@@ -77,6 +82,9 @@ export default function Trailer()
 
     <div>
     <Navbar style={{ position: 'fixed', top: '0', width: '100%', zIndex: '1' }} />
+    <button type="button" className="btn btn-outline-light" onClick={() => navigate(`/movies/${currentMovie}`)} style={{marginLeft:'5px',marginTop:'5px'}}>
+        Back
+    </button>
     <div style={{ paddingTop: '60px' }}> {/* Adjust the top padding based on the navbar height */}
         <div style={{
             display: 'flex',

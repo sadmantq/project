@@ -81,6 +81,22 @@
     border-radius: 4px;
 }
 
+.movie-image:hover{
+    transform: scale(1.02);
+    box-shadow: 0 0 10px 2px rgb(0, 0, 0);
+}
+
 /* .search-input:hover{
     box-shadow:burlywood;
+} */
+
+/* .search-result-container {
+    border: 2px solid #ccc; 
+    padding: 10px;
+    margin-bottom: 20px;
+} */
+
+/* .hover-effect:hover{
+    scale: (1.02);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
 } */
