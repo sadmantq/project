@@ -5,7 +5,7 @@
     z-index: 999;
     justify-content: center;
     background-color: #666;
-    height: 60px;
+    height: 100px;
 
     display: flex;
     align-items: center;
@@ -13,21 +13,40 @@
 }
 
 .search-input {
-    width: 40%;
+    width: 30%;
     
-    height: 36px;
+    height: 60px;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 4px;
     font-size: 16px;
     outline: none;
 
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
+   
 
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
 }
+
+.search-input:hover{
+    transform: scale(1.02);
+    background-color:white ;
+    animation: glow 1s infinite alternate; 
+    border-width: 2px;
+    
+}
+
+@keyframes glow {
+    0% {
+      border-color: #f00; /* Start color of the glow */
+    }
+    100% {
+      border-color: #ff0; /* End color of the glow */
+    }
+  }
 
 .search-button {
 
@@ -51,37 +70,51 @@
 }
 
 .search-result-container {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
+    position: relative;
+    display: inline-block;
+    list-style-type: none;
+
+    
+
+    width: 30%;
+    
+    height: auto;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+
 }
 
-.movie-item {
+/* ._movie-item {
     width: 250px;
+    height: 300px;
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
+    /* background-color: transparent; */
     /* display: flex; */
-}
+*/
 
-.movie-name {
+._movie-name {
     font-weight: bold;
 }
 
-.movie-year {
-    color: #666;
-    font-size: 14px;
-}
 
-.movie-image {
+
+._movie-image {
     width: 100%;
     height: auto;
     margin-top: 10px;
     border-radius: 4px;
 }
 
-.movie-image:hover{
+._movie-image:hover{
     transform: scale(1.02);
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
 }

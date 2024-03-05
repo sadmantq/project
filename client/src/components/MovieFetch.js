@@ -74,7 +74,7 @@ export default function MovieFetch(){
         <>
         
         <div className="movie-container">
-            <SearchBar />
+            <SearchBar   />
             {data.map(item => {
                 return (
                     <>

@@ -1150,6 +1150,84 @@ app.get('/getTrailer/:movieId', async(req,res) => {
     }
 })
 
+//add trailer to database
+
+app.post('/admin/addTrailer/:movie_id/:movie_trailer', async (req,res) => {
+    try
+    {
+        const movie_id = req.params.movie_id;
+        const movie_trailer = req.params.movie_trailer;
+
+        const {rows} = await pool.query(
+            `
+            INSERT INTO
+            TRAILERS
+            (MOVIE_ID, MOVIE_TRAILER)
+            VALUES
+            ($1, $2)
+            RETURNING *;
+            `,
+            [movie_id,movie_trailer]
+        )
+
+        if (rows.length == 0)
+        {
+            const errMsg = 'insert failed';
+            throw new Error(errMsg);
+        }
+        else
+        {
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
+//add a movie to the database and add a trailer
+
+app.post('/admin/addMovie', async (req,res)=> {
+    try
+    {
+        const name = req.body.name;
+        const year = req.body.year;
+        const image = req.body.image;
+        const genre = req.body.genre;
+        const description = req.body.description;
+        const isAdult = req.body.isAdult;
+
+        const {rows} = await pool.query(
+            `
+            INSERT INTO 
+            MOVIES
+            (NAME, YEAR, IMAGE, IS_ADULT, GENRE, DESCRIPTION)
+            VALUES
+            ($1, $2, $3, $4, $5, $6)
+            RETURNING *;
+            `,
+            [name,year,image,isAdult,genre,description]
+        )
+
+        if (rows.length == 0)
+        {
+            const errMsg = 'invalid insert';
+            throw new Error(errMsg);
+        }
+        else
+        {
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
 
 //add movies to cloud and fetch and show to premium members
 

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import './AddMovie.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function AddMovie()
 {
@@ -9,6 +12,13 @@ export default function AddMovie()
     const [genre,setGenre] = useState('');
     const [description,setDescription] = useState('');
     const [isAdult,setIsAdult] = useState('');
+    const [trailer, setTrailer] = useState('');
+
+    const [movieId,setMovieId] = useState(0);
+
+    const navigate = useNavigate();
+
+    
 
     async function handleSubmit()
     {
@@ -16,7 +26,37 @@ export default function AddMovie()
         {
             try
             {
+                // console.log(name)
+                // console.log(year)
+                // console.log(image)
+                // console.log(genre)
+                // console.log(description)
+                // console.log(isAdult)
+                const _body = {
+                  name:name,
+                  year:year,
+                  image:image,
+                  genre: genre,
+                  description: description,
+                  isAdult: isAdult
+                };
 
+                await axios.post(`http://localhost:5000/admin/addMovie`, _body)
+                .then(res => setMovieId(res.data.id))
+                .catch(err => console.log(err));
+
+                if(movieId && trailer)
+                {
+                  await axios.post(`http://localhost:5000/admin/addTrailer/${movieId}/${trailer}`)
+                  .then(res => {
+                    console.log(res.data)
+                    navigate('/admin')
+                  })
+                  .catch(err => console.log(err));
+
+                  
+
+                }
             }
             catch(err)
             {
@@ -45,6 +85,9 @@ export default function AddMovie()
           <label htmlFor="genre" className="form-label">Genre</label>
           <input type="text" className="form-control" id="genre" placeholder="Romance/Comedy/..." style={{ height: '45px' }} value={genre} onChange={(e)=>setGenre(e.target.value)} />
     
+          <label htmlFor="trailer" className="form-label">Trailer</label>
+          <input type="text" className="form-control" id="trailer" placeholder="Add youtube link..." style={{ height: '45px' }} value={trailer} onChange={(e)=>setTrailer(e.target.value)} />
+
           <label htmlFor="description" className="form-label">Description Of The Movie</label>
           <input type="text" className="form-control" id="description" placeholder="The movie is ..." style={{ height: '65px' }} value={description} onChange={(e)=>setDescription(e.target.value)}  />
     
