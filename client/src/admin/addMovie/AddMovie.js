@@ -72,8 +72,10 @@ export default function AddMovie()
 
     return (
         <div className="whole-page" style={{backgroundImage: 'url(https://img.freepik.com/free-photo/movie-background-collage_23-2149876005.jpg?w=1380&t=st=1709488987~exp=1709489587~hmac=da866aa72bc1b8ada73d6510474747b610f418c5ada21d796f4f70133c35ee03)', backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}>
+
+          <button className="btn btn-outline-light" onClick={()=>navigate('/admin')}>Back</button>
         <div className="mb-3" style={{ marginLeft: '30%', marginRight: '20%',  width: '40%'}}>
-          <label htmlFor="name" className="form-label" style={{marginTop:'10%'}}>Name</label>
+          <label htmlFor="name" className="form-label" style={{marginTop:'6%'}}>Name</label>
           <input type="text" className="form-control" id="name" placeholder="Movie Name..." style={{ height: '45px' }} value={name} onChange={(e)=> setName(e.target.value)} />
     
           <label htmlFor="year" className="form-label">Year of Release</label>

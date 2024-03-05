@@ -81,15 +81,15 @@ export default function SearchBar()
                         <p className="movie-genre">Genre: {item.genre}</p>
                         <p className="movie-description">Review: {item.description}</p> */}
                         {/*<Link to ={`/movies/${item.id}`}>Click to see full movie</Link>*/}
-        {resultShow && <div className="search-result-container" style={{backgroundColor: 'whitesmoke'}}>
+        {resultShow && <div className="search-result-container" /*style={{backgroundColor: 'whitesmoke'}}*/>
             {resultShow && result.map(item => {
                 return(
                     <>
-                       <div className="w-25 h-25 p-3 hover-effect"  key={item.id} onClick={()=>{
+                       <div className="__movie-item" style={{color:'black'}} key={item.id} onClick={()=>{
                             setCurrentMovie(item.id);
                             navigate(`/movies/${item.id}`)}}>
-                                {/* <p>{item.name}</p> */}
-                            <img className="_movie-image" src={item.image} alt="Movie Poster" />
+                            <p className="__movie-name">{item.name}</p>
+                            {/* <img className="_movie-image" src={item.image} alt="Movie Poster" /> */}
                         </div> 
                     </>
                 )

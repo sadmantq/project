@@ -1,0 +1,12 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+.funny:hover{
+    transform: scale(1.02);
+    border-color: aquamarine;
+}
+
+.funny{
+    border-width: 2px;
+}
+
