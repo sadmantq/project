@@ -32,8 +32,9 @@ export default function DirectorFetch() {
 
 
     return (
-        <div className="container">
+        <>
             <Navbar />
+        <div className="container">
             {
 
                 directors.map(item => {
@@ -57,5 +58,6 @@ export default function DirectorFetch() {
                 })
             }
         </div>
+        </>
     )
 }

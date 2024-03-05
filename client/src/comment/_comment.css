@@ -3,7 +3,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    width: 35%;
+    width: 40%;
 }
 
 .comment-form {
@@ -18,7 +18,7 @@
 }
 
 .comment-input {
-    width: 75%;
+    width: 80%;
     padding-left: 50px;
     padding-top: 10px;
     padding-bottom: 10px;

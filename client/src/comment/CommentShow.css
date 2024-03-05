@@ -3,7 +3,7 @@
 }
 
 .single-comment-container {
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
     width: 400px;
     height: auto;
@@ -14,10 +14,10 @@
 
 .user-id-container {
     font-weight: bold;
-    color: antiquewhite;
+    color: burlywoodb;
 }
 
 .review-container {
     margin-top: 5px;
-    color:beige;
+    color:brown;
 }
