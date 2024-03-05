@@ -135,7 +135,7 @@ export default function MovieFetch(){
                 </ul>
             </nav> */}
 
-<nav>
+<nav style={{backgroundColor:'white'}}>
     <ul className="pagination">
         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
             <button className="page-link" onClick={() => paginate(currentPage - 1)}>Previous</button>
