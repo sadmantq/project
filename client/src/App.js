@@ -21,6 +21,7 @@ import SearchResults from "./Search/SearchResults";
 import AdminMain from "./admin/AdminMain";
 import AddMovie from "./admin/addMovie/AddMovie";
 import RemoveMovie from "./admin/removeMovie/RemoveMovie";
+import Mywatchlist from "./watchList/Mywatchlist";
 
 
 
@@ -59,6 +60,7 @@ function App() {
         <Route path = '/admin' element = {<AdminMain />} />
         <Route path = '/admin/addMovie' element ={<AddMovie />} />
         <Route path = '/admin/removeMovie' element ={<RemoveMovie />} />
+        <Route path = '/myWatchlist' element = {<Mywatchlist />} />
 
 
         

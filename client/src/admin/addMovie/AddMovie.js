@@ -41,13 +41,11 @@ export default function AddMovie()
                   isAdult: isAdult
                 };
 
-                await axios.post(`http://localhost:5000/admin/addMovie`, _body)
-                .then(res => setMovieId(res.data.id))
-                .catch(err => console.log(err));
+                const movieInfo = await axios.post(`http://localhost:5000/admin/addMovie`, _body)
+                
 
-                if(movieId && trailer)
-                {
-                  await axios.post(`http://localhost:5000/admin/addTrailer/${movieId}/${trailer}`)
+                
+                  await axios.post(`http://localhost:5000/admin/addTrailer/${movieInfo.data.id}/${trailer}`)
                   .then(res => {
                     console.log(res.data)
                     navigate('/admin')
@@ -56,7 +54,7 @@ export default function AddMovie()
 
                   
 
-                }
+                
             }
             catch(err)
             {
@@ -71,7 +69,7 @@ export default function AddMovie()
 
 
     return (
-        <div className="whole-page" style={{backgroundImage: 'url(https://img.freepik.com/free-photo/movie-background-collage_23-2149876005.jpg?w=1380&t=st=1709488987~exp=1709489587~hmac=da866aa72bc1b8ada73d6510474747b610f418c5ada21d796f4f70133c35ee03)', backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}>
+        <div className="whole-page" /*style={{backgroundImage: 'url(https://img.freepik.com/free-photo/movie-background-collage_23-2149876005.jpg?w=1380&t=st=1709488987~exp=1709489587~hmac=da866aa72bc1b8ada73d6510474747b610f418c5ada21d796f4f70133c35ee03)', backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}*/>
 
           <button className="btn btn-outline-light" onClick={()=>navigate('/admin')}>Back</button>
         <div className="mb-3" style={{ marginLeft: '30%', marginRight: '20%',  width: '40%'}}>

@@ -848,6 +848,8 @@ app.delete("/removeFromWatchlist/:userId/:movieId", async (req,res)=> {
         const userId = req.params.userId;
         const movieId = req.params.movieId;
 
+        
+
         const {rows} = await pool.query(
             `
             DELETE FROM WATCHLIST
@@ -867,7 +869,7 @@ app.delete("/removeFromWatchlist/:userId/:movieId", async (req,res)=> {
         }
         else
         {
-            //console.log(rows[0]);
+            console.log(rows[0]);
             res.status(200).json(rows[0]);
         }
     } 
@@ -880,17 +882,20 @@ app.delete("/removeFromWatchlist/:userId/:movieId", async (req,res)=> {
 
 //fetch the watchlist of a user
 
-app.post("/fetchUserWatchlist/:userId", async (req,res) => {
+
+app.get("/fetchUserWatchlist/:userId", async (req,res) => {
     try 
     {
         const userId = req.params.userId;
         
         const {rows} = await pool.query(
             `
-            SELECT MOVIE_ID
-            FROM WATCHLIST
+            SELECT M.*
+            FROM WATCHLIST W JOIN MOVIES M
+            ON
+            (W.MOVIE_ID = M.ID)
             WHERE
-            USER_ID = $1;
+            W.USER_ID = $1;
             `,
             [userId]
         )

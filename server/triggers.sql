@@ -165,3 +165,54 @@ CREATE TRIGGER before_insert_check_likes_duplicate
 BEFORE INSERT ON likes
 FOR EACH ROW
 EXECUTE FUNCTION check_likes_duplicate();
+
+
+
+--makes sure the genre table is unique
+
+
+CREATE OR REPLACE FUNCTION check_genre_uniqueness() RETURNS TRIGGER AS $$
+BEGIN
+    
+    IF EXISTS (SELECT 1 FROM genre WHERE name = NEW.name AND id <> NEW.id) THEN
+        RAISE EXCEPTION 'Duplicate genre name: %', NEW.name;
+    END IF;
+
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER enforce_genre_uniqueness
+BEFORE INSERT OR UPDATE ON genre
+FOR EACH ROW EXECUTE FUNCTION check_genre_uniqueness();
+
+
+--movies a add korle auto genre tables e add hoye jay
+
+CREATE OR REPLACE FUNCTION insert_genre_on_movie_insert()
+RETURNS TRIGGER AS $$
+DECLARE
+genre_id INTEGER;
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM genre WHERE name = NEW.genre) THEN
+        
+        INSERT INTO genre (name) VALUES (NEW.genre) ;
+    END IF;
+
+    CALL get_genre_id(NEW.genre, genre_id);
+
+    INSERT INTO genre_movie(movie_id, genre_id) VALUES (NEW.id, genre_id);
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER add_genre_on_movie_insert
+AFTER INSERT ON movies
+FOR EACH ROW
+EXECUTE FUNCTION insert_genre_on_movie_insert();
+
+
+

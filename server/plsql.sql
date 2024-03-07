@@ -52,3 +52,6 @@ CREATE TRIGGER before_insert_check_dislikes_duplicate
 BEFORE INSERT ON dislikes
 FOR EACH ROW
 EXECUTE FUNCTION check_dislikes_duplicate();
+
+
+

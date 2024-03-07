@@ -135,6 +135,7 @@ export default function MovieFetch(){
                 </ul>
             </nav> */}
 
+< div className="pagination-container" style={{display:'flex', justifyContent:'center'}}>
 <nav style={{backgroundColor:'white'}}>
     <ul className="pagination">
         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
@@ -150,6 +151,7 @@ export default function MovieFetch(){
         </li>
     </ul>
 </nav>
+</div>
 
         </>
     );

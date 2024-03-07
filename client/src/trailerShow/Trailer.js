@@ -82,6 +82,8 @@ export default function Trailer()
 
     <div>
     <Navbar style={{ position: 'fixed', top: '0', width: '100%', zIndex: '1' }} />
+    
+    <div className="trailer-container">
     <button type="button" className="btn btn-outline-light" onClick={() => navigate(`/movies/${currentMovie}`)} style={{marginLeft:'5px',marginTop:'5px'}}>
         Back
     </button>
@@ -101,7 +103,8 @@ export default function Trailer()
             </div>
         </div>
     </div>
-</div>
+    </div>
+    </div>
 
       );
 }

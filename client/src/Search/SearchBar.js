@@ -7,7 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import CurrentMovieContext from "../context/CurrentMovieContext";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function SearchBar() 
 {
@@ -71,10 +71,23 @@ export default function SearchBar()
                 <button className='search-button' >
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
+                
+                
+                <>
+                <button className="btn btn-outline-light" style={{marginLeft:'600px' ,marginRight:'15px'}} onClick={()=>navigate()}>
+                    <FontAwesomeIcon icon = {faUser} />
+
+                   
+                </button>
+
+                <button className="btn btn-outline-light" style={{ marginRight:'10px'}} onClick = {() => navigate('/myWatchlist')}>
+                    Watchlist
+                </button>
 
                 <button className="btn btn-outline-light" style={{marginLeft: 'auto', marginRight:'10px'}} onClick = {() => navigate('/login')}>
                     Log out
                 </button>
+                </>
            
         </div>
                         {/* <p className="movie-adult">{item.is_adult ? 'Adult' : 'Not Adult'}</p>

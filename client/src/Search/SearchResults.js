@@ -19,18 +19,41 @@ export default function SearchResults()
 
     const [shit,setShit] = useState('');
     const [search,setSearch] = useState('');
+    const  [results,setResults] = useState([]);
 
 
-    const [selectedOption, setSelectedOption] = useState(''); // State to manage the selected option
+    const [selectedOption, setSelectedOption] = useState('name'); // State to manage the selected option
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value); 
     }
 
+
+    async function handleSubmit()
+    {
+        try
+        {
+            if (selectedOption == 'name')
+            {
+                axios.get(`http://localhost:5000/Search/movieName/${search}`)
+                .then(res => setResults(res.data))
+                .catch(err => console.log(err));
+            }
+            else if (selectedOption == 'genre')
+            {
+                
+            }
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+    }
+
     return (
         <>
         <Navbar />        
-        <div className="container">
+        <div className="container" style={{marginTop:'100px'}}>
            
             <div className="row">
                 <div className="col-md-3">
@@ -59,9 +82,9 @@ export default function SearchResults()
                                 console.log(search);
                             }} 
                         />
-                        <div className="input-group-append">
+                        <div className="input-group-append" onClick={handleSubmit}>
                             <button className="btn btn-outline-secondary" style={{marginLeft:'10px'}} type="button" id="button-addon2">Search</button>
-                        </div>
+                        </div >
                     </div>
                 </div>
             </div>
