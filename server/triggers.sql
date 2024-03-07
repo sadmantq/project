@@ -214,5 +214,24 @@ AFTER INSERT ON movies
 FOR EACH ROW
 EXECUTE FUNCTION insert_genre_on_movie_insert();
 
+-- user_info and login_Credentials er moddhe unique username thakbe
 
+CREATE OR REPLACE FUNCTION prevent_duplicate_username()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the new username already exists in the table
+    IF EXISTS (SELECT 1 FROM user_info WHERE username = NEW.username) THEN
+        RAISE EXCEPTION 'Username already exists: %', NEW.username;
+    END IF;
+    
+    -- If the username doesn't exist, allow the INSERT or UPDATE operation
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
+CREATE TRIGGER unique_username_trigger
+BEFORE INSERT OR UPDATE ON user_info
+FOR EACH ROW
+EXECUTE FUNCTION prevent_duplicate_username();
+
+--

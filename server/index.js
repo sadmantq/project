@@ -518,7 +518,7 @@ app.get('/numberOfLikes/:movieId', async (req,res) => {
 
         const {rows} = await pool.query(
             `
-            SELECT COUNT(*)
+            SELECT COUNT(*) AS like_num
             FROM LIKES
             WHERE
             MOVIE_ID = $1;
@@ -929,7 +929,7 @@ app.get("/numberOfUsersWatchlist/:movieId", async (req,res) => {
 
         const {rows} = await pool.query(
             `
-            select get_favorite_users_count($1);
+            select get_favorite_users_count($1) as watchlist_num;
             `,
             [movieId]
         )
@@ -1233,6 +1233,41 @@ app.post('/admin/addMovie', async (req,res)=> {
         res.status(400).send(err.message);
     }
 })
+
+//get number of dislikes 
+
+app.get('/getDislikesss/:movieId', async(req,res)=> {
+
+    try
+    {
+        const movieId = req.params.movieId;
+        //console.log(movieId);
+
+        const {rows} = await pool.query(
+            `
+            SELECT get_dislikes_count($1) AS dislikenum;
+            `,
+            [movieId]
+        )
+        
+        if (rows.length == 0)
+        {
+            throw new Error("invalid")
+        }
+        else{
+
+            console.log(rows[0]);
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
 
 //add movies to cloud and fetch and show to premium members
 

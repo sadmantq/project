@@ -94,7 +94,7 @@ export default function MovieFetch(){
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(4); // You can change this value as needed
+    const [itemsPerPage] = useState(8); // You can change this value as needed
 
     useEffect(() => {
         axios.get("http://localhost:5000/movies")

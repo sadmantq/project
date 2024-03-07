@@ -1,0 +1,8 @@
+
+.cross{
+    transition: transform .2s ease;
+}
+
+.cross:hover{
+    transform: scale(2);
+}

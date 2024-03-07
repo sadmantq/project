@@ -20,6 +20,13 @@ export default function MovieDetails() {
     const [dislikeClicked,setDislikeClicked] = useState(false);
     const [watchlistClicked,setWatchlistClicked] = useState(false);
 
+    const [numberOfLikes, setNumberOfLikes] = useState(0);
+    const [numberOfDislikes, setNumberOfDislikes] = useState(0);
+    const [numberOfWatchlist, setNumberOfWatchlist] = useState(0);
+    const [updateLike, setUpdateLike] = useState(false);
+
+
+
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -49,8 +56,24 @@ export default function MovieDetails() {
         .then(res => setTrailer(res.data))
         .catch(err => console.log(err));
 
+        axios.get(`http://localhost:5000/numberOfLikes/${id}`)
+        .then(res => setNumberOfLikes(res.data.like_num))
+        .catch(err => console.log(err));
 
-    }, id); // id as a dependency
+        axios.get(`http://localhost:5000/numberOfUsersWatchlist/${id}`)
+        .then(res => setNumberOfWatchlist(res.data[0].watchlist_num))
+        .catch(err => console.log(err));
+
+        axios.get(`http://localhost:5000/getDislikesss/${id}`)
+        .then(res => {
+            console.log(res.data);
+            setNumberOfDislikes(res.data.dislikenum);
+            console.log(numberOfDislikes);
+        })
+        .catch(err => console.log(err));
+
+
+    }, [id,updateLike]); // id as a dependency
 
     async function handleLike()
     {
@@ -60,6 +83,7 @@ export default function MovieDetails() {
             {
                 const responseFinal = await axios.post(`http://localhost:5000/like/${id}/${userId}`);
                 setLikeClicked(!likeClicked);
+                setUpdateLike(!updateLike);
             }
             catch(err)
             {
@@ -77,6 +101,7 @@ export default function MovieDetails() {
             {
                 const responseFinal = await axios.delete(`http://localhost:5000/removeLike/${id}/${userId}`);
                 setLikeClicked(!likeClicked);
+                setUpdateLike(!updateLike);
             }
             catch(err)
             {
@@ -92,6 +117,7 @@ export default function MovieDetails() {
             {
                 const responseFinal = await axios.post(`http://localhost:5000/dislike/${id}/${userId}`);
                 setDislikeClicked(!dislikeClicked);
+                setUpdateLike(!updateLike);
             }
             catch(err)
             {
@@ -107,6 +133,7 @@ export default function MovieDetails() {
             {
                 const responseFinal = await axios.delete(`http://localhost:5000/removeDislike/${id}/${userId}`);
                 setDislikeClicked(!dislikeClicked);
+                setUpdateLike(!updateLike);
             }
             catch(err)
             {
@@ -122,6 +149,7 @@ export default function MovieDetails() {
             {
                 const responseFinal = await axios.post(`http://localhost:5000/addToWatchlist/${id}/${userId}`);
                 setWatchlistClicked(!watchlistClicked);
+                setUpdateLike(!updateLike);
             }
             catch(err)
             {
@@ -137,6 +165,7 @@ export default function MovieDetails() {
             {
                 const responseFinal = await axios.delete(`http://localhost:5000/removeFromWatchlist/${userId}/${id}`);
                 setWatchlistClicked(!watchlistClicked);
+                setUpdateLike(!updateLike);
             }
             catch(err)
             {
@@ -166,7 +195,7 @@ export default function MovieDetails() {
                 <button type="button" className="btn btn-outline-info" style={{marginBottom:'9px'}} onClick={() => navigate(`/trailer/${trailer.movie_trailer}`)}>see trailer</button>
 
                 <div className="d-flex flex-row mb-3 column-gap-3">
-                <div className="like-button">
+                <div className="like-button" style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
                     <button type ="button" className={`btn ${likeClicked? 'btn-primary' : 'btn-secondary' }`} onClick={() => {
                         if (likeClicked == false)
                         {
@@ -188,8 +217,11 @@ export default function MovieDetails() {
                             <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                         </svg>
                     </button>
+                    <div className="number-of-likes" style={{marginLeft:'20px'}}>
+                        {numberOfLikes}
+                    </div>
                 </div>
-                <div className="dislike-button">
+                <div className="dislike-button" style={{display:'flex', flexDirection:'column'}}>
                     <button type="button" className={`btn ${dislikeClicked? `btn-danger` : `btn-secondary`}`} onClick={() => {
                         if (!dislikeClicked)
                         {
@@ -211,8 +243,11 @@ export default function MovieDetails() {
                             <path d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.38 1.38 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51q.205.03.443.051c.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.9 1.9 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.856 0-.29-.036-.586-.113-.857a2 2 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.2 3.2 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28H8c-.605 0-1.07.08-1.466.217a4.8 4.8 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591"/>
                         </svg>
                     </button>
+                    <div className="dislike-number--" style={{marginLeft:'20px'}}>
+                        {numberOfDislikes}
+                    </div>
                 </div>
-                <div className="watch-button">
+                <div className="watch-button" style={{display:"flex", flexDirection:"column"}}>
                     <button type="button" className={`btn ${watchlistClicked? `btn-warning`: `btn-secondary`}`} onClick={() => {
                         if (!watchlistClicked)
                         {
@@ -228,6 +263,9 @@ export default function MovieDetails() {
                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
                         </svg>
                     </button>
+                    <div className="number-watchlist" style={{marginLeft:"20px"}}>
+                        {numberOfWatchlist}
+                    </div>
                 </div>
                 </div>
 

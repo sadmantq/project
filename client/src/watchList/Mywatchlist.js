@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import './Mywatchlist.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import Navbar from "../_components/Navbar";
 
 export default function Mywatchlist()
 {
@@ -45,13 +46,16 @@ export default function Mywatchlist()
     
 
     return (
+        <div>
+
+            <Navbar />
         <div className="container" style={{display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
             {!funny && movies.map(item => (
                     < div className="movie-item" key={item.id}>
                         <div className="top-right" style={{display:'flex'}}>
                             <h6 className="movie-id">ID: {item.id}</h6>
                             
-                                <FontAwesomeIcon icon={faCircleXmark} style={{marginLeft:'auto'}} onClick={async() => {
+                                <FontAwesomeIcon icon={faCircleXmark} style={{marginLeft:'auto', color:'red'}} className="cross" onClick={async() => {
                                     await axios.delete(`http://localhost:5000/removeFromWatchlist/${userId}/${item.id}`);
                                     setRerend(!rerend);
                                 }} />
@@ -66,6 +70,7 @@ export default function Mywatchlist()
             {funny && <div className="error-container">
                 Your Watchlist is Empty TwT 
             </div>}
+        </div>
         </div>
     )
 }
