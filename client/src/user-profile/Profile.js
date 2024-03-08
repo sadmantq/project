@@ -65,12 +65,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import UserIdContext from "../context/UserIdContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../_components/Navbar";
 
 export default function Profile() {
     const { userId } = useContext(UserIdContext);
     const [info, setInfo] = useState({});
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:5000/nameFromId/${userId}`)
@@ -93,11 +95,11 @@ export default function Profile() {
                     <p><strong>Date of Birth:</strong> {info.date_of_birth}</p>
                 </div>
             </div>
-            <Link to="/updateUser">
-                <button className="btn btn-primary mt-3 transform-button">
+            
+                <button className="btn btn-primary mt-3 transform-button" onClick={()=> navigate(`/updateUser/${info.username}`)}>
                     Update Info
                 </button>
-            </Link>
+            
         </div>
         </div>
     );

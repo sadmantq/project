@@ -1,13 +1,22 @@
 
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import UserIdContext from "../context/UserIdContext";
 
 export default function UpdateProfile() {
 
+    const old_username = useParams();
+
     const navigate = useNavigate();
 
+    const {userId} = useContext(UserIdContext);
+    //const [old_username, setOld_username] = useState('');
+
+    //
+
     const [formData, setFormData] = useState({
+        old_username:old_username,
         username: "",
         password: "",
         type: "", 
@@ -29,7 +38,7 @@ export default function UpdateProfile() {
         axios.post(`http://localhost:5000/updateUser`, formData)
         .then(() => navigate('/user'))
         .catch(err => console.log(err));
-        
+
     };
 
     return (

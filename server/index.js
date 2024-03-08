@@ -648,10 +648,13 @@ app.post('/movies/reviewPost', async(req,res)=>{
     }
 })
 
-app.delete('/movies/deleteReviewPost', async(req,res)=>{
+app.delete('/movies/deleteReviewPost/:movieId/:userId', async(req,res)=>{
     try {
-        const movieId = req.body.movieId;
-        const userId = req.body.userId;
+        const movieId = req.params.movieId;
+        const userId = req.params.userId;
+
+        console.log(movieId);
+        console.log(userId);
 
         const {rows} = await pool.query(
             `
@@ -755,13 +758,13 @@ app.delete('/:movieId/:userId/deleteRating', async(req,res)=>{
 
 //user changes his review of a movie
 
-app.post('/:movieId/:userId/updateReview',async(req,res)=>{
+app.post('/updateReview/:movieId/:userId/:newReview',async(req,res)=>{
     try 
     {
         const movieId = req.params.movieId;
         const userId = req.params.userId;
 
-        const newReview = req.body.newReview;
+        const newReview = req.params.newReview;
 
         const {rows} = await pool.query(
             `
@@ -1350,6 +1353,38 @@ app.get('/nameFromId/:id', async(req,res) => {
     }
 })
 
+//get username from userId
+
+app.get('/getUsernameFromUserId/:id', async(req,res) => {
+    try
+    {
+        const id = req.params.id;
+
+        const {rows} = await pool.query(
+            `
+            select username
+            from login_credentials
+            where id = $1;
+            `,
+            [id]
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('error happened');
+        }
+        else
+        {
+            //console.log(rows[0]);
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
 
 app.post('/updateUser', async(req,res)=> {
     try
@@ -1357,6 +1392,27 @@ app.post('/updateUser', async(req,res)=> {
         const formData = req.body;
 
         console.log(formData);
+
+        const {rows} = await pool.query(
+            `
+            SELECT update_user_info(
+                $1,
+                $2,
+                $3,
+                $4,
+                $5,
+                $6
+            );
+            `,
+            [
+                formData.old_username.name,
+                formData.username,
+                formData.password,
+                formData.type,
+                formData.nationality,
+                formData.gender
+            ]
+        )
 
         res.status(200).send("epic");
     }

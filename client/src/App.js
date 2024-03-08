@@ -27,6 +27,7 @@ import ProducerFetch from "./components/ProducerFetch";
 import ProducerDetails from "./components/ProducerDetails";
 import Profile from "./user-profile/Profile";
 import UpdateProfile from "./user-profile/UpdateProfile";
+import UpdateReview from "./comment/UpdateReview";
 
 
 
@@ -71,7 +72,8 @@ function App() {
         <Route path = '/producerFetch' element = {<ProducerFetch />} />
         <Route path = '/producer/:id' element = {<ProducerDetails />} />
         <Route path = '/user' element = { <Profile />} />
-        <Route path = '/updateUser' element = {<UpdateProfile />}  />
+        <Route path = '/updateUser/:name' element = {<UpdateProfile />}  />
+        <Route path = '/updateReview' element = {<UpdateReview />} />
 
 
         

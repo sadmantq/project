@@ -251,5 +251,47 @@ BEFORE INSERT ON user_info
 FOR EACH ROW
 EXECUTE FUNCTION check_duplicate_username();
 
+-- update on 
+
+CREATE OR REPLACE FUNCTION update_login_credentials()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE login_credentials
+    SET 
+        username = NEW.username,
+        password = NEW.password,
+        type = NEW.type
+    WHERE
+        username = OLD.username;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER user_info_update_trigger
+AFTER UPDATE ON user_info
+FOR EACH ROW
+EXECUTE FUNCTION update_login_credentials();
 
 
+-- 
+
+CREATE OR REPLACE FUNCTION update_user_info(
+    old_username_param VARCHAR,
+    new_username_param VARCHAR,
+    new_password_param VARCHAR,
+    new_type_param VARCHAR,
+    new_nationality_param VARCHAR,
+    new_gender_param VARCHAR
+) RETURNS VOID AS $$
+BEGIN
+    UPDATE user_info
+    SET 
+        username = new_username_param,
+        password = new_password_param,
+        type = new_type_param,
+        nationality = new_nationality_param,
+        gender = new_gender_param
+    WHERE
+        username = old_username_param;
+END;
+$$ LANGUAGE plpgsql;
