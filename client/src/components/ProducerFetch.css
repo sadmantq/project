@@ -1,0 +1,38 @@
+.producer-card {
+
+    
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    
+}
+
+@keyframes glow {
+    0% {
+      border-color: #f00; /* Start color of the glow */
+    }
+    100% {
+      border-color: #ff0; /* End color of the glow */
+    }
+}
+
+.producer-card:hover {
+    transform: scale(1.1); /* Apply transform scale effect on hover */
+}
+
+.producer-name {
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.producer-id {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+
+

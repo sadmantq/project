@@ -33,7 +33,7 @@ function UpdateReview() {
 
     return (
         <div>
-            <button className='btn btn-link' onClick={() => navigate(`/movies/${currentMovie}`)}>
+            <button className='btn btn-link'  onClick={() => navigate(`/movies/${currentMovie}`)}>
                 <FontAwesomeIcon icon = {faAngleLeft} />
                 Back
             </button>

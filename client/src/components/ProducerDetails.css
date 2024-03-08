@@ -1,0 +1,14 @@
+@keyframes glow {
+    0% {
+      border-color: #f00; /* Start color of the glow */
+    }
+    100% {
+      border-color: #ff0; /* End color of the glow */
+    }
+}
+
+.card{
+    margin-top: 100px;
+    animation: glow 1s infinite alternate; 
+    border-width: 2px;
+}

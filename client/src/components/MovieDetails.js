@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./MovieDetails.css"; // Import CSS file
 import Navbar from "../_components/Navbar";
@@ -181,7 +181,7 @@ export default function MovieDetails() {
     return (
         <>
         <Navbar />
-        <div className="movie-details-container">
+        <div className="movie-details-container" >
             
             <img className="movie-poster" src={movieData.image} alt="Movie Poster" />
             <div className="movie-info">
@@ -191,6 +191,8 @@ export default function MovieDetails() {
                 <div className="movie-adult">Adult: {movieData.is_adult}</div>
                 <div className="movie-genre">Genre: {movieData.genre}</div>
                 <div className="movie-review">Review: {movieData.description}</div>
+                <div className="movie-producer" >Producer: <Link to = {`/producer/${movieData.producer_id}`}> {movieData.producer_name} </Link></div>
+                <div className="movie-director">Director: <Link to = {`/director/${movieData.director_id}`}> {movieData.director_name}</Link></div>
 
                 <button type="button" className="btn btn-outline-info" style={{marginBottom:'9px'}} onClick={() => navigate(`/trailer/${trailer.movie_trailer}`)}>see trailer</button>
 

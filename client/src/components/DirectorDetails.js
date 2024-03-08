@@ -32,19 +32,19 @@ export default function DirectorDetails(){
     console.log(thisDirector);
 
     return (
-        <>
+        <div>
                         <Navbar />
                         <div className="director-container"  >
-                            <div className="director-id">{thisDirector.director_id}</div>
-                            <div className="director-full-name">{thisDirector.director_name}</div>
-                            <div className="director-email">{thisDirector.director_email}</div>
-                            <div className="director-birthdate">{thisDirector.director_birthdate}</div>
-                            <div className="director-homecountry">{thisDirector.director_country}</div>
-                            <div className="director-nationality">{thisDirector.director_nationality}</div>
-                            <div className="director-awards">{thisDirector.director_awards}</div>
-                            <div className="director-gender">{thisDirector.director_gender}</div>
+                            <div className="director-id">Director ID: {thisDirector.director_id}</div>
+                            <div className="director-full-name">Director Name: {thisDirector.director_name}</div>
+                            <div className="director-email">Director Email: {thisDirector.director_email}</div>
+                            <div className="director-birthdate">Director Date of Birth: {thisDirector.director_birthdate}</div>
+                            <div className="director-homecountry">Director Country: {thisDirector.director_country}</div>
+                            <div className="director-nationality">Director Nationality: {thisDirector.director_nationality}</div>
+                            <div className="director-awards">Number Of Awards: {thisDirector.director_awards}</div>
+                            <div className="director-gender">Gender: {thisDirector.director_gender}</div>
                         </div>
-        </>
+        </div>
 
 
     )

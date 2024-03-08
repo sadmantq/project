@@ -73,7 +73,7 @@ export default function UpdateProfile() {
                     <button type="submit" className="btn btn-primary">Update Profile</button>
                 </form>
             </div>
-            <Link to="/user">
+            <Link to="/user" >
                 <button className="btn btn-secondary mt-3">Back to Profile</button>
             </Link>
         </div>
