@@ -63,7 +63,7 @@ export default function Mywatchlist()
                         </div>
                         <p className="movie-name">{item.name}</p>
                         <p className="movie-year">Year of Release: {item.year}</p>
-                        <img className="movie-image" src={item.image} alt="Movie Poster" />
+                        <img className="movie-image" style={{height:'300px', width:'200px'}} src={item.image} alt="Movie Poster" />
                     </div>
                 ))}
 

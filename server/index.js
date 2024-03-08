@@ -1292,7 +1292,29 @@ app.get('/getDislikesss/:movieId', async(req,res)=> {
 
 
 
-//add movies to cloud and fetch and show to premium members
+app.delete("/deleteMovie/:id", async(req,res)=> {
+    try
+    {
+        const id = req.params.id;
+
+        const {rows} = await pool.query(
+
+            `
+            delete from 
+            movies
+            where id = $1;
+            `,
+            [id]
+        )
+
+        res.status(200).send("deleted");
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
 
 
 

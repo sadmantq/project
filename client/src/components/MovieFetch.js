@@ -121,7 +121,9 @@ export default function MovieFetch(){
                         <h6 className="movie-id">ID: {item.id}</h6>
                         <p className="movie-name">{item.name}</p>
                         <p className="movie-year">Year of Release: {item.year}</p>
+                        <div className="movie-image-container">
                         <img className="movie-image" src={item.image} alt="Movie Poster" />
+                        </div>
                     </div>
                 ))}
             </div>
