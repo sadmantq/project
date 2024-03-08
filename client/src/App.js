@@ -25,6 +25,8 @@ import Mywatchlist from "./watchList/Mywatchlist";
 import ProducerContext from "./context/ProducerContext";
 import ProducerFetch from "./components/ProducerFetch";
 import ProducerDetails from "./components/ProducerDetails";
+import Profile from "./user-profile/Profile";
+import UpdateProfile from "./user-profile/UpdateProfile";
 
 
 
@@ -68,6 +70,8 @@ function App() {
         <Route path = '/myWatchlist' element = {<Mywatchlist />} />
         <Route path = '/producerFetch' element = {<ProducerFetch />} />
         <Route path = '/producer/:id' element = {<ProducerDetails />} />
+        <Route path = '/user' element = { <Profile />} />
+        <Route path = '/updateUser' element = {<UpdateProfile />}  />
 
 
         

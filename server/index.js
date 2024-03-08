@@ -1316,6 +1316,58 @@ app.delete("/deleteMovie/:id", async(req,res)=> {
     }
 })
 
+//get user info from user_id
+
+app.get('/nameFromId/:id', async(req,res) => {
+    try
+    {
+        const id = req.params.id;
+
+        const {rows} = await pool.query(
+            `
+            select ui.*
+            from login_credentials lc join user_info ui
+            on (lc.username = ui.username)
+            where lc.id = $1;
+            `,
+            [id]
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('no such user');
+        }
+        else
+        {
+            //console.log(rows[0]);
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
+app.post('/updateUser', async(req,res)=> {
+    try
+    {
+        const formData = req.body;
+
+        console.log(formData);
+
+        res.status(200).send("epic");
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
 
 
 

@@ -74,7 +74,7 @@ export default function SearchBar()
                 
                 
                 <>
-                <button className="btn btn-outline-light" style={{marginLeft:'600px' ,marginRight:'15px'}} onClick={()=>navigate()}>
+                <button className="btn btn-outline-light" style={{marginLeft:'600px' ,marginRight:'15px'}} onClick={()=>navigate('/user')}>
                     <FontAwesomeIcon icon = {faUser} />
 
                    
