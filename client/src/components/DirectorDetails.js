@@ -36,9 +36,9 @@ export default function DirectorDetails(){
                         <Navbar />
                         <div className="director-container"  >
                             <div className="director-id">{thisDirector.director_id}</div>
-                            <div className="director-full-name">{thisDirector.director_first_name} {thisDirector.director_last_name}</div>
-                            <div className="director-age">{thisDirector.director_age}</div>
+                            <div className="director-full-name">{thisDirector.director_name}</div>
                             <div className="director-email">{thisDirector.director_email}</div>
+                            <div className="director-birthdate">{thisDirector.director_birthdate}</div>
                             <div className="director-homecountry">{thisDirector.director_country}</div>
                             <div className="director-nationality">{thisDirector.director_nationality}</div>
                             <div className="director-awards">{thisDirector.director_awards}</div>

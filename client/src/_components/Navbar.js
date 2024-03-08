@@ -10,6 +10,7 @@ export default function Navbar(){
                 <li><Link to="/movies" style={{color: 'black', textDecoration:'none'}} className="link-text">Home</Link></li>
                 <li><Link to = '/about' style={{color: 'black', textDecoration:'none'}} className="link-text">About</Link></li>
                 <li><Link to = '/directorFetch' style={{color: 'black', textDecoration:'none'}} className="link-text">Directors</Link></li>
+                <li><Link to = '/producerFetch' style={{color: 'black', textDecoration:'none'}} className="link-text">Producers</Link></li>
                 <li><Link to = '/login' style={{color: 'black', textDecoration:'none'}} className="link-text">Log Out</Link></li>
             </ul>
         </nav>

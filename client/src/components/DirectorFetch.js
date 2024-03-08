@@ -45,7 +45,7 @@ export default function DirectorFetch() {
                             navigate(`/director/${item.director_id}`);
                         }}>
                             <div className="director-id">{item.director_id}</div>
-                            <div className="director-full-name">{item.director_first_name} {item.director_last_name}</div>
+                            <div className="director-full-name">{item.director_name}</div>
                             {/* <div className="director-age">{item.director_age}</div>
                             <div className="director-email">{item.director_email}</div>
                             <div className="director-homecountry">{item.director_country}</div>

@@ -79,23 +79,15 @@ app.post("/login",async(req,res)=>{
 app.get("/movies", async(req,res)=>{
     try {
         const {rows} = await pool.query(
-            `SELECT * 
-            FROM MOVIES;`
+            `select *
+            from movies m 
+            join director_movie dm on (m.id = dm.movie_id)
+            join director_name dn on (dm.director_id = dn. director_id)
+            join producer_movie pm on (m.id = pm.movie_id)
+            join producer_name pn on (pm.producer_id = pn.producer_id);`
         )
         
-        // const movieList = rows.map(movie =>{
-        //     const {id,name,year,image,is_adult,genre,description} = movie;
-        //     return {
-        //         id,
-        //         name,
-        //         year,
-        //         image,
-        //         is_adult,
-        //         genre,
-        //         description
-        //     }
-        // })
-        //console.log(rows);
+       
         res.status(200).json(rows);
         
     } catch (err) {
@@ -113,36 +105,17 @@ app.get("/movies/:id", async(req,res)=>{
         
         //console.log(id)
         const {rows} = await pool.query(
-            // `SELECT M.*, DM.DIRECTOR_NAME,PM.PRODUCER_NAME
-            // FROM MOVIES M JOIN DIRECTOR_MOVIE DM
-            // ON(M.ID = DM.MOVIE_ID)
-            // JOIN PRODUCER_MOVIE PM
-            // ON (DM.MOVIE_ID = PM.MOVIE_ID)
-            // WHERE M.ID = $1;            
-            // `,
-            `SELECT * 
-            FROM MOVIES
-            WHERE ID = $1;`,
+            
+            `select *
+            from movies m 
+            join director_movie dm on (m.id = dm.movie_id)
+            join director_name dn on (dm.director_id = dn. director_id)
+            join producer_movie pm on (m.id = pm.movie_id)
+            join producer_name pn on (pm.producer_id = pn.producer_id)
+            where m.id = $1;`,
             [id]
         )
-        //console.log(rows);
-
-        // const movieInfo = rows.map(movie =>{ 
-        //     const {id,name,year,image,is_adult,genre,description,director_name,producer_name} = movie;
-
-        //     return({
-        //         id,
-        //         name,
-        //         year,
-        //         image,
-        //         is_adult,
-        //         genre,
-        //         description,
-        //         director_name,
-        //         producer_name
-        //     })});
-
-        //     console.log(movieInfo);
+        
 
             res.status(200).json(rows[0]);
     } catch (err) {
@@ -155,9 +128,22 @@ app.get("/director/:id",async(req,res)=>{
     try {
         const id = req.params.id;
         const {rows} = await pool.query(
-            `SELECT *
-            FROM DIRECTOR_INFO
-            WHERE DIRECTOR_ID = $1;`,
+            `select dm.director_id as director_id ,
+            dm.director_name as director_name, 
+            de.director_email as director_email, 
+            dc.director_country as director_country, 
+            dn.director_nationality as director_nationality, 
+            dg.director_gender as director_gender, 
+            da.director_awards as director_awards,
+            dbb.director_birthdate as director_birthdate
+            from director_name dm
+            join director_email de on (dm.director_id = de.director_id)
+            join director_country dc on (de.director_id = dc.director_id)
+            join director_nationality dn on (dc.director_id = dn.director_id)
+            join director_gender dg on (dn.director_id = dg.director_id)
+            join director_awards da on (dg.director_id = da.director_id)
+            join director_birthdate dbb on (da.director_id = dbb.director_id)            
+            where dm.director_id = $1;`,
             [id]
         )
         console.log(rows);
@@ -177,20 +163,34 @@ app.get("/director/:id",async(req,res)=>{
 
 app.get("/producer/:id",async(req,res)=>{
     try {
-        const id = req.params;
+        const id = req.params.id;
         const {rows} = await pool.query(
-            `SELECT *
-            FROM PRODUCERS
-            WHERE ID = $1;`,
+            `select 
+            pn.producer_id as producer_id,
+            pn.producer_name as producer_name,
+            pa.producer_awards as producer_awards,
+            pd.producer_birthdate as producer_birthdate,
+            pc.producer_country as producer_country,
+            pe.producer_email as producer_email,
+            pg.producer_gender as producer_gender,
+            pnat.producer_nationality as producer_nationality
+            from producer_name pn
+            join producer_awards pa on (pn.producer_id = pa.producer_id)
+            join producer_birthdate pd on (pa.producer_id = pd.producer_id)
+            join producer_country pc on (pd.producer_id = pc.producer_id)
+            join producer_email pe on (pc.producer_id = pe.producer_id)
+            join producer_gender pg on (pe.producer_id = pg.producer_id)
+            join producer_nationality pnat on (pg.producer_id = pnat.producer_id)
+            where pn.producer_id = $1;`,
             [id]
         )
-        console.log(rows);
+        console.log(rows[0]);
         if (rows.length === 0){
             const message = "no such producer found";
             throw new Error(message);
         }
         else{
-            res.status(200).json(rows);
+            res.status(200).json(rows[0]);
         }
 
     } catch (err) {
@@ -209,15 +209,7 @@ app.get("/users", async(req,res)=> {
             `SELECT * FROM LOGIN_CREDENTIALS;`
         )
         console.log(rows);
-        // const userData = rows.map(item => {
-        //     const {username , password, type} = rows;
-        //     return {
-        //         username,
-        //         password,
-        //         type
-        //     }
-        // })
-        //console.log(userData);
+        
         res.status(200).json(rows);
     } catch (err) {
         console.error(err);
@@ -228,7 +220,22 @@ app.get("/users", async(req,res)=> {
 app.get("/directors",async(req,res)=>{
     try {
         const {rows} = await pool.query(
-            `SELECT * FROM DIRECTOR_INFO;`
+            `select dm.director_id as director_id ,
+            dm.director_name as director_name, 
+            de.director_email as director_email, 
+            dc.director_country as director_country, 
+            dn.director_nationality as director_nationality, 
+            dg.director_gender as director_gender, 
+            da.director_awards as director_awards,
+            dbb.director_birthdate as director_birthdate
+            from director_name dm
+            join director_email de on (dm.director_id = de.director_id)
+            join director_country dc on (de.director_id = dc.director_id)
+            join director_nationality dn on (dc.director_id = dn.director_id)
+            join director_gender dg on (dn.director_id = dg.director_id)
+            join director_awards da on (dg.director_id = da.director_id)
+            join director_birthdate dbb on (da.director_id = dbb.director_id);
+            `
         )
         //console.log(rows);
         res.status(200).json(rows);
@@ -242,7 +249,23 @@ app.get("/directors",async(req,res)=>{
 app.get("/producers",async(req,res)=>{
     try {
         const {rows} = await pool.query(
-            `SELECT * FROM PRODUCER_INFO;`
+            `select 
+            pn.producer_id as producer_id,
+            pn.producer_name as producer_name,
+            pa.producer_awards as producer_awards,
+            pd.producer_birthdate as producer_birthdate,
+            pc.producer_country as producer_country,
+            pe.producer_email as producer_email,
+            pg.producer_gender as producer_gender,
+            pnat.producer_nationality as producer_nationality
+            from producer_name pn
+            join producer_awards pa on (pn.producer_id = pa.producer_id)
+            join producer_birthdate pd on (pa.producer_id = pd.producer_id)
+            join producer_country pc on (pd.producer_id = pc.producer_id)
+            join producer_email pe on (pc.producer_id = pe.producer_id)
+            join producer_gender pg on (pe.producer_id = pg.producer_id)
+            join producer_nationality pnat on (pg.producer_id = pnat.producer_id);
+            `
         )
         console.log(rows);
         res.status(200).json(rows);

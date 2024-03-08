@@ -22,6 +22,9 @@ import AdminMain from "./admin/AdminMain";
 import AddMovie from "./admin/addMovie/AddMovie";
 import RemoveMovie from "./admin/removeMovie/RemoveMovie";
 import Mywatchlist from "./watchList/Mywatchlist";
+import ProducerContext from "./context/ProducerContext";
+import ProducerFetch from "./components/ProducerFetch";
+import ProducerDetails from "./components/ProducerDetails";
 
 
 
@@ -32,12 +35,14 @@ function App() {
   const [userId,setUserId] = React.useState();
   const [currentMovie,setCurrentMovie] = React.useState();
   const [currentDirector,setCurrentDirector] = React.useState();
+  const [currentProducer, setCurrentProducer] = React.useState();
   
 
   const [reviewCng,setReviewCng] = React.useState(true);
 
   return (
     <>
+        <ProducerContext.Provider value = {{currentProducer, setCurrentProducer}}>
         <DirectorIdContext.Provider value = {{currentDirector,setCurrentDirector}}>
         <UserIdContext.Provider value = {{userId,setUserId}}>
         <LoginContext.Provider value = {{loginInfo,setLoginInfo}}>
@@ -61,6 +66,8 @@ function App() {
         <Route path = '/admin/addMovie' element ={<AddMovie />} />
         <Route path = '/admin/removeMovie' element ={<RemoveMovie />} />
         <Route path = '/myWatchlist' element = {<Mywatchlist />} />
+        <Route path = '/producerFetch' element = {<ProducerFetch />} />
+        <Route path = '/producer/:id' element = {<ProducerDetails />} />
 
 
         
@@ -71,6 +78,7 @@ function App() {
         </LoginContext.Provider>
         </UserIdContext.Provider>
         </DirectorIdContext.Provider>
+        </ProducerContext.Provider>
     </>
   );
 }
