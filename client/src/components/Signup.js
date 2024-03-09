@@ -62,8 +62,8 @@ const Signup = () => {
         <div className="input-container">
           <select value={type} onChange={(e) => settype(e.target.value)}>
             <option value="user">User</option>
-            <option value="director">Director</option>
-            <option value="producer">Producer</option>
+            {/* <option value="director">Director</option>
+            <option value="producer">Producer</option> */}
             <option value="admin">Admin</option>
           </select>
         </div>

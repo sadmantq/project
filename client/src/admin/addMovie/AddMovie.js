@@ -11,7 +11,7 @@ export default function AddMovie()
     const [image,setImage] = useState('');
     const [genre,setGenre] = useState('');
     const [description,setDescription] = useState('');
-    const [isAdult,setIsAdult] = useState('');
+    const [isAdult,setIsAdult] = useState('yes');
     const [trailer, setTrailer] = useState('');
 
     const [movieId,setMovieId] = useState(0);

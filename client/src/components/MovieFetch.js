@@ -18,7 +18,7 @@ export default function MovieFetch() {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(8);
+    const [itemsPerPage] = useState(7);
     const [sortBy, setSortBy] = useState(null);
 
     useEffect(()=> {
