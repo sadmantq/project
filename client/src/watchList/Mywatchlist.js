@@ -59,8 +59,8 @@ export default function Mywatchlist()
 
             <Navbar />
 
-            <div>
-                Number of Movies in Watchlist: {amount}
+            <div style={{marginLeft:'20px'}}>
+                Number of Movies in Watchlist: <strong> {amount} </strong>
             </div>
 
         <div className="container" style={{display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>

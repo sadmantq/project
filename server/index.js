@@ -1492,8 +1492,325 @@ app.get("/getGenreCount", async(req,res)=> {
 })
 
 
+/// sorting the fetched movies in a particul manner
+
+// sorting by name asc
+
+app.get('/sortAsc', async(req,res)=>{
+    try
+    {
+        const {rows} = await pool.query(
+            `
+            select * from sort_movies_by_name_asc();
+            `
+        );
+
+        if (rows.length == 0)
+        {
+            throw new Error("invalidd")
+        }
+        else 
+        {
+            res.status(200).json(rows);
+        }
+
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//sorting by name desc
+
+app.get('/sortDesc', async(req,res)=> {
+    try
+    {
+        const {rows} = await pool.query(
+            `
+            select * from sort_movies_by_name_desc();
+            `
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('invalid');
+        }
+        else 
+        {
+            console.log(rows);
+            res.status(200).json(rows);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//sort by year asc
+
+app.get('/sortYearAsc', async(req,res)=> {
+    try
+    {
+        const {rows} = await pool.query(
+            `
+            select * from sort_movies_by_year_asc();
+            `
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('invalid');
+        }
+        else 
+        {
+            console.log(rows);
+            res.status(200).json(rows);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//sort movies by year desc
+
+app.get('/sortYearDesc', async(req,res)=> {
+    try
+    {
+        const {rows} = await pool.query(
+            `
+            select * from sort_movies_by_year_desc();
+            `
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('invalid');
+        }
+        else 
+        {
+            console.log(rows);
+            res.status(200).json(rows);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
+//sort movies by genre asc
+
+app.get('/sortGenreAsc', async(req,res)=> {
+    try
+    {
+        const {rows} = await pool.query(
+            `
+            select * from sort_movies_by_genre_asc();
+            `
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('invalid');
+        }
+        else 
+        {
+            console.log(rows);
+            res.status(200).json(rows);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//sort by genre desc
+
+app.get('/sortGenreDesc', async(req,res)=> {
+    try
+    {
+        const {rows} = await pool.query(
+            `
+            select * from sort_movies_by_genre_desc();
+            `
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error('invalid');
+        }
+        else 
+        {
+            console.log(rows);
+            res.status(200).json(rows);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
 
 //sorting the search results by given thang
+
+//search by ascending name
+
+app.get('/searchAsc/:search', async(req,res)=> {
+    try
+    {
+        const search = req.params.search;
+
+        const {rows} = await pool.query(
+            `
+            select * from search_movies_by_name_asc($1);
+            `,
+            [search]
+        )
+
+        res.status(200).json(rows);
+        
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//search by descending name
+
+app.get('/searchDesc/:search', async(req,res)=> {
+    try
+    {
+        const search = req.params.search;
+
+        const {rows} = await pool.query(
+            `
+            select * from search_movies_by_name_desc($1);
+            `,
+            [search]
+        )
+
+        res.status(200).json(rows);
+        
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//search by ascending year
+
+app.get('/searchYearAsc/:search', async(req,res)=> {
+    try
+    {
+        const search = req.params.search;
+
+        const {rows} = await pool.query(
+            `
+            select * from search_movies_by_year_asc($1); 
+            `,
+            [search]
+        )
+
+        res.status(200).json(rows);
+        
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//search by descending year
+
+app.get('/searchYearDesc/:search', async(req,res)=> {
+    try
+    {
+        const search = req.params.search;
+
+        const {rows} = await pool.query(
+            `
+            select * from search_movies_by_year_desc($1);
+            `,
+            [search]
+        )
+
+        res.status(200).json(rows);
+        
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//search by ascending genre
+
+app.get('/searchGenreAsc/:search', async(req,res)=> {
+    try
+    {
+        const search = req.params.search;
+
+        const {rows} = await pool.query(
+            `
+            select * from search_movies_by_genre_asc($1);
+            `,
+            [search]
+        )
+
+        res.status(200).json(rows);
+        
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+//search by descendinng genre
+
+app.get('/searchGenreDesc/:search', async(req,res)=> {
+    try
+    {
+        const search = req.params.search;
+
+        const {rows} = await pool.query(
+            `
+            select * from search_movies_by_genre_desc($1);
+            `,
+            [search]
+        )
+
+        res.status(200).json(rows);
+        
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
 
 
 
