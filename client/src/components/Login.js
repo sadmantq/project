@@ -8,6 +8,7 @@ import axios from "axios";
 import { useContext } from 'react';
 import LoginContext from '../context/LoginContext';
 import UserIdContext from '../context/UserIdContext';
+import CustomToast from '../funny/CustomToast';
 
 const Login = () => {
 
@@ -22,7 +23,7 @@ const Login = () => {
 
   const handleLogin = async(e) => {
     e.preventDefault();
-    // Add your login logic here
+    
 
     try {
       const response = await axios.post("http://localhost:5000/login",{
@@ -54,7 +55,10 @@ const Login = () => {
   };
 
   return (
+
+    
     <div className="login-container">
+      
       <form onSubmit={handleLogin}>
         <h2>Login</h2>
         <div className="input-container">

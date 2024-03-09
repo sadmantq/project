@@ -55,23 +55,52 @@
 //     )
 // }
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+// import Toast from 'react-bootstrap/Toast';
+
+// export default function CustomToast() {
+//     const [showToast, setShowToast] = useState(true);
+
+//     const handleClose = () => setShowToast(false);
+
+//     return (
+//         <Toast show={showToast} onClose={handleClose}>
+//             <Toast.Header>
+//                 <img src="..." className="rounded me-2" alt="..." />
+//                 <strong className="me-auto">Bootstrap</strong>
+//                 <small className="text-body-secondary">now</small>
+//                 <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
+//             </Toast.Header>
+//             <Toast.Body>You cannot add more than one review buddy :D </Toast.Body>
+//         </Toast>
+//     );
+// }
+
+
+// CustomToast.js
+
+import React from 'react';
 import Toast from 'react-bootstrap/Toast';
 
-export default function CustomToast() {
-    const [showToast, setShowToast] = useState(true);
+const CustomToast = ({ onClose }) => {
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: '9999'
+      }}
+    >
+      <Toast onClose={onClose}>
+        <Toast.Header>
+          <strong className="mr-auto">Notification</strong>
+        </Toast.Header>
+        <Toast.Body>Only one review per person</Toast.Body>
+      </Toast>
+    </div>
+  );
+};
 
-    const handleClose = () => setShowToast(false);
-
-    return (
-        <Toast show={showToast} onClose={handleClose}>
-            <Toast.Header>
-                <img src="..." className="rounded me-2" alt="..." />
-                <strong className="me-auto">Bootstrap</strong>
-                <small className="text-body-secondary">11 mins ago</small>
-                <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
-            </Toast.Header>
-            <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
-        </Toast>
-    );
-}
+export default CustomToast;

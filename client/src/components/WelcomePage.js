@@ -15,7 +15,7 @@ const WelcomePage = () => {
   };
 
   return (
-    <div className="welcome-container">
+    <div className="welcome-container" >
       <h1>Welcome to Relate Rift</h1>
       <div className="animation-container">
         <div className="background-animation" style={{ top: '20%', left: '20%' }}></div>

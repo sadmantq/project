@@ -26,12 +26,7 @@ export default function AddMovie()
         {
             try
             {
-                // console.log(name)
-                // console.log(year)
-                // console.log(image)
-                // console.log(genre)
-                // console.log(description)
-                // console.log(isAdult)
+                
                 const _body = {
                   name:name,
                   year:year,
