@@ -20,6 +20,7 @@ export default function Mywatchlist()
 
     const navigate = useNavigate();
 
+    const [amount, setAmount] = useState(0);
    
 
     useEffect(() => {
@@ -30,11 +31,19 @@ export default function Mywatchlist()
              axios.get(`http://localhost:5000/fetchUserWatchlist/${userId}`)
             .then(res => setMovies(res.data))
             .catch(()=>setFunny(true));
+
+
+
+            axios.get(`http://localhost:5000/NumberOfMoviesInWatchlist/${userId}`)
+            .then(res => setAmount(res.data.amount))
+            .catch(err => console.log(err));
             
 
             //throw new Error('dg');
 
             //setRerend(!rerend);
+
+
         }
         catch(err)
         {
@@ -49,6 +58,11 @@ export default function Mywatchlist()
         <div>
 
             <Navbar />
+
+            <div>
+                Number of Movies in Watchlist: {amount}
+            </div>
+
         <div className="container" style={{display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
             {!funny && movies.map(item => (
                     < div className="movie-item" key={item.id}>

@@ -1423,7 +1423,77 @@ app.post('/updateUser', async(req,res)=> {
     }
 })
 
+//number of movies a user has
 
+app.get('/NumberOfMoviesInWatchlist/:userId', async (req,res)=> {
+    try
+    {
+        const userId = req.params.userId;
+
+        console.log(userId);
+
+        const {rows} = await pool.query(
+            `
+            select count(*) as amount
+            from watchlist
+            where user_id = $1;
+            `,
+            [userId]
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error("invalid")
+        }
+        else
+        {
+            console.log(rows[0]);
+            res.status(200).json(rows[0]);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
+//find the number of  movies each genre has
+
+app.get("/getGenreCount", async(req,res)=> {
+    try
+    {
+        const {rows} = await pool.query(
+            `
+            SELECT g.id, g.name, 
+                (SELECT COUNT(*) 
+                FROM genre_movie gm 
+                WHERE gm.genre_id = g.id) AS movie_count
+            FROM genre g;
+            `
+        )
+
+        if (rows.length == 0)
+        {
+            throw new Error("could not fetch");
+        }
+        else
+        {
+            //console.log(rows);
+            res.status(200).json(rows);
+        }
+    }
+    catch(err)
+    {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+})
+
+
+
+//sorting the search results by given thang
 
 
 

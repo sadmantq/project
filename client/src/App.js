@@ -28,6 +28,7 @@ import ProducerDetails from "./components/ProducerDetails";
 import Profile from "./user-profile/Profile";
 import UpdateProfile from "./user-profile/UpdateProfile";
 import UpdateReview from "./comment/UpdateReview";
+import ShowGenre from "./genre/ShowGenre";
 
 
 
@@ -74,6 +75,7 @@ function App() {
         <Route path = '/user' element = { <Profile />} />
         <Route path = '/updateUser/:name' element = {<UpdateProfile />}  />
         <Route path = '/updateReview' element = {<UpdateReview />} />
+        <Route path = '/allGenre' element = {<ShowGenre />} />
 
 
         

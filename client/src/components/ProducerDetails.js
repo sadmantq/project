@@ -64,7 +64,7 @@ export default function ProducerDetails() {
             <Navbar />
             
         <div className="container mt-4">
-            <div className="card">
+            <div className="card" style={{ width: "500px" }}>
                 <div className="card-body">
                     <h5 className="card-title">{producer.producer_name}</h5>
                     <p className="card-text"><strong>ID:</strong> {producer.producer_id}</p>

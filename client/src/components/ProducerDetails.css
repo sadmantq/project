@@ -1,14 +1,20 @@
-@keyframes glow {
+/* @keyframes gg {
     0% {
-      border-color: #f00; /* Start color of the glow */
+      border-color: #f00; 
     }
     100% {
-      border-color: #ff0; /* End color of the glow */
+      border-color: #ff0; 
     }
-}
+} */
 
 .card{
     margin-top: 100px;
-    animation: glow 1s infinite alternate; 
+    /* animation: gg 1s infinite alternate;  */
     border-width: 2px;
+    transition: all .7s ease;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: dimgrey;
 }
